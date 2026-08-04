@@ -1,3 +1,0 @@
-70 passed
-Branch-aware coverage: 86.78%
-Threshold: 85%
