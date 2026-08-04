@@ -1,0 +1,33 @@
+{
+  "combined_genes": 23686,
+  "datasets": [
+    {
+      "cells": 7186,
+      "dataset_id": "GSE115978",
+      "expression_unit": "raw_count",
+      "genes": 23686,
+      "patients": null,
+      "samples": 33,
+      "sha256": "a0512f2b069484e63c2025c56200a280613290735abedf68b21d30f968def768"
+    },
+    {
+      "cells": 16291,
+      "dataset_id": "GSE120575",
+      "expression_unit": "TPM",
+      "genes": 21957,
+      "patients": 37,
+      "samples": 48,
+      "sha256": "43fa3d50acd151be89aa8e94ac83cc730dbbf7623473339c5534b77c16d48e3f"
+    }
+  ],
+  "feature_universe": "GSE115978 genes; GSE120575 intersected to this universe",
+  "gse115978_cells": 7186,
+  "gse115978_genes": 23686,
+  "gse115978_samples": 33,
+  "gse120575_cells": 16291,
+  "gse120575_genes": 21957,
+  "gse120575_patient_states": 48,
+  "gse120575_patients": 37,
+  "mapped_ensembl": 20669,
+  "target_evaluation_status": "NOT_COMPUTED"
+}

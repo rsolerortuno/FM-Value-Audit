@@ -1,0 +1,9 @@
+{
+  "documented_corpus_identifier_count": 0,
+  "evaluation_identifier_count": 1,
+  "model_id": "random_mlp_small",
+  "overlap_count": 0,
+  "overlap_identifiers": [],
+  "reason": "No exact overlap was found among fully documented identifiers.",
+  "status": "RESOLVED_CLEAN"
+}

@@ -1,0 +1,27 @@
+{
+  "cell_subsampling": false,
+  "cells_retained": 150849,
+  "cells_total": 150849,
+  "full_csc_bundle": "GSE179994_ALL_150849_full_csc_bundle",
+  "full_csc_bundle_written": true,
+  "full_h5ad": "GSE179994_ALL_150849_raw_counts.h5ad",
+  "full_h5ad_status": "WRITTEN",
+  "full_pseudobulk_written": true,
+  "genes": 19790,
+  "labelled_patients": 11,
+  "labelled_target_lesions": 13,
+  "mixed_response_patients": [
+    "P1",
+    "P13"
+  ],
+  "nnz": 205034916,
+  "nonresponsive_target_lesions": 5,
+  "outcome_mapping_status": "CORRECTED_TO_OFFICIAL_LESION_LEVEL",
+  "patient_level_response_mapping_status": "INVALID_NOT_USED",
+  "patients": 36,
+  "r_object_size_gb": 2.30556302517653,
+  "rds_sha256": "8275907e6a341048c89d30cb6485dd81125f8922c952d0cd648cf6a3acaa1cc0",
+  "responsive_target_lesions": 8,
+  "samples": 47,
+  "status": "COMPLETE_ALL_CELLS_SPARSE"
+}

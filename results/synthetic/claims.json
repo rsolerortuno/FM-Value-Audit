@@ -1,0 +1,106 @@
+{
+  "conditional": [
+    {
+      "comparison_state": "DETECTABLE_GAIN",
+      "leakage_status": "RESOLVED_CLEAN",
+      "scope": "synthetic_only",
+      "statement": "On this synthetic run, mean_expression had AUPRC excess 0.033462 versus popularity."
+    },
+    {
+      "comparison_state": "NO_DETECTABLE_DIFFERENCE",
+      "leakage_status": "RESOLVED_CLEAN",
+      "scope": "synthetic_only",
+      "statement": "On this synthetic run, differential_expression had AUPRC excess 0.017647 versus popularity."
+    },
+    {
+      "comparison_state": "NO_DETECTABLE_DIFFERENCE",
+      "leakage_status": "RESOLVED_CLEAN",
+      "scope": "synthetic_only",
+      "statement": "On this synthetic run, cell_type_specificity had AUPRC excess 0.022740 versus popularity."
+    },
+    {
+      "comparison_state": "NO_DETECTABLE_DIFFERENCE",
+      "leakage_status": "RESOLVED_CLEAN",
+      "scope": "synthetic_only",
+      "statement": "On this synthetic run, network_centrality had AUPRC excess 0.013561 versus popularity."
+    },
+    {
+      "comparison_state": "NO_DETECTABLE_DIFFERENCE",
+      "leakage_status": "RESOLVED_CLEAN",
+      "scope": "synthetic_only",
+      "statement": "On this synthetic run, druggable_class had AUPRC excess 0.018176 versus popularity."
+    },
+    {
+      "comparison_state": "DETECTABLE_GAIN",
+      "leakage_status": "RESOLVED_CLEAN",
+      "scope": "synthetic_only",
+      "statement": "On this synthetic run, supervised_with_popularity had AUPRC excess 0.048598 versus popularity."
+    },
+    {
+      "comparison_state": "DETECTABLE_GAIN",
+      "leakage_status": "RESOLVED_CLEAN",
+      "scope": "synthetic_only",
+      "statement": "On this synthetic run, supervised_without_popularity had AUPRC excess 0.048264 versus popularity."
+    },
+    {
+      "comparison_state": "DETECTABLE_GAIN",
+      "leakage_status": "RESOLVED_CLEAN",
+      "scope": "synthetic_only",
+      "statement": "On this synthetic run, random_mlp_small had AUPRC excess 0.049534 versus popularity."
+    },
+    {
+      "comparison_state": "DETECTABLE_GAIN",
+      "leakage_status": "RESOLVED_CLEAN",
+      "scope": "synthetic_only",
+      "statement": "On this synthetic run, random_mlp_large had AUPRC excess 0.041493 versus popularity."
+    },
+    {
+      "comparison_state": "NO_DETECTABLE_DIFFERENCE",
+      "leakage_status": "RESOLVED_CLEAN",
+      "scope": "synthetic_only",
+      "statement": "On this synthetic run, random_ranking had AUPRC excess -0.009035 versus popularity."
+    },
+    {
+      "comparison_state": "DETECTABLE_GAIN",
+      "leakage_status": "RESOLVED_CLEAN",
+      "scope": "synthetic_only",
+      "statement": "On this synthetic run, supervised_unmatched_compute had AUPRC excess 0.048635 versus popularity."
+    },
+    {
+      "comparison_state": "NO_DETECTABLE_DIFFERENCE",
+      "leakage_status": "RESOLVED_CLEAN",
+      "scope": "synthetic_only",
+      "statement": "On this synthetic run, supervised_ood_transfer had AUPRC excess -0.012877 versus popularity."
+    },
+    {
+      "comparison_state": "NO_DETECTABLE_DIFFERENCE",
+      "leakage_status": "RESOLVED_CLEAN",
+      "scope": "synthetic_only",
+      "statement": "On this synthetic run, random_mlp_small_ood_transfer had AUPRC excess -0.010885 versus popularity."
+    }
+  ],
+  "permitted": [
+    {
+      "scope": "synthetic_harness_only",
+      "statement": "The committed synthetic benchmark executed without pretrained weights."
+    },
+    {
+      "scope": "executed_methods",
+      "statement": "All reported method differences use paired intervals against popularity."
+    }
+  ],
+  "unsupported": [
+    {
+      "reason": "No pretrained checkpoint was executed.",
+      "statement": "Any real foundation model outperforms or underperforms cheap baselines."
+    },
+    {
+      "reason": "The committed data are synthetic and no wet-lab validation exists.",
+      "statement": "Any ranked gene is a clinically valid therapeutic target."
+    },
+    {
+      "reason": "The OOD perturbation is a harness stress test only.",
+      "statement": "The synthetic OOD shift predicts transfer across real tissues or diseases."
+    }
+  ]
+}

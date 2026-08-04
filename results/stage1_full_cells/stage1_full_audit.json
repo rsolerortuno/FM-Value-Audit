@@ -1,0 +1,178 @@
+{
+  "alignment_assertions": {
+    "all_cell_subsampling_false": true,
+    "gse115_pseudobulk_matches_gene_and_sample_metadata": true,
+    "gse120_pseudobulk_matches_gene_and_state_metadata": true,
+    "gse179_cell_metadata_complete_and_unique": true,
+    "gse179_mixed_response_patients_preserved": true,
+    "gse179_official_lesion_mapping_samples_match_metadata": true,
+    "gse179_pseudobulk_matches_gene_and_sample_metadata": true
+  },
+  "cell_subsampling": false,
+  "clinical_target_metrics_status": "NOT_COMPUTED",
+  "compact_artifacts": {
+    "GSE115978_gene_features.csv.gz": {
+      "sha256": "30752633758f2e17d2f74194bda83d72be8fea892855ce3ae920867596bdf513",
+      "size_bytes": 864636
+    },
+    "GSE115978_gene_order.csv": {
+      "sha256": "985d967e139dc12bcfc4c861d9da7d6dccd59fd47aebf0187919b051a8503ac7",
+      "size_bytes": 166367
+    },
+    "GSE115978_sample_metadata.csv": {
+      "sha256": "920b26d4abf316fcf4481069f1c60ebae4b4620dc041c2d650c35e35c76a2b15",
+      "size_bytes": 1516
+    },
+    "GSE115978_sample_pseudobulk_cpm.npz": {
+      "sha256": "277df629eee34caa7031efc6cc7eab2ed386672eb796b38d90ebe2f744c72b34",
+      "size_bytes": 2173399
+    },
+    "GSE115978_summary.json": {
+      "sha256": "19c80441f985153eb09fd0b70137233eb50941a109fa7d09f716da2d1bf3ffed",
+      "size_bytes": 290
+    },
+    "GSE120575_gene_features.csv.gz": {
+      "sha256": "47bed0a655194d712974f0b86c12c27edb795be43141c9ef3d02dcfc4ed0b248",
+      "size_bytes": 1997925
+    },
+    "GSE120575_gene_order_ALL.csv": {
+      "sha256": "873bbe062811b4e72dfe8173870df0384734ac80fa859da182b2d5a810b6dc32",
+      "size_bytes": 536169
+    },
+    "GSE120575_patient_state_mean_tpm.npz": {
+      "sha256": "06e2193e4d15fbb6240c743841be18457f6fbf65e9c50c944b26d015cf0b52a4",
+      "size_bytes": 5159568
+    },
+    "GSE120575_patient_state_metadata.csv": {
+      "sha256": "19d88fd2cab09c2227f22384470fa2a1fb78a241becf2b93d2d824ec89578e71",
+      "size_bytes": 2165
+    },
+    "GSE120575_summary.json": {
+      "sha256": "48e68c86ad6c4573515e1b0a89a8ed2539a18f3695716f7bbe99b26ea904bda0",
+      "size_bytes": 499
+    },
+    "GSE179994_ALL_150849_cell_metadata.csv.gz": {
+      "sha256": "de07dc5398e4f333ac8935e8f81575e56c619ca293cb73648050dde8eab142b2",
+      "size_bytes": 901331
+    },
+    "GSE179994_gene_order_ALL.csv": {
+      "sha256": "5f2163267e1c9964917ecbf535fcfbb809db1eececd4d929bdf9b82989b2d7ef",
+      "size_bytes": 130505
+    },
+    "GSE179994_official_lesion_sample_mapping.csv": {
+      "sha256": "7a9f694bff30f4b55c530cc6f2869b8c3b25de730ee89592f6e2ad0d8bfff17e",
+      "size_bytes": 2154
+    },
+    "GSE179994_sample_metadata.csv": {
+      "sha256": "1acd52d55547d0be8c690620835c744555239ec196e5a17a7217b244f5102d95",
+      "size_bytes": 2921
+    },
+    "GSE179994_sample_pseudobulk_counts.npz": {
+      "sha256": "ea2b103b75486621bbedf592a5c2511cd35a1df3d0a08bfc2039f42a683e5d8b",
+      "size_bytes": 1314401
+    },
+    "GSE179994_summary.json": {
+      "sha256": "51678326f9b2abe7342c9f123ee5be2d1010206e1e9d86bf48f9feb650224bec",
+      "size_bytes": 858
+    }
+  },
+  "datasets": {
+    "GSE115978": {
+      "cell_subsampling": false,
+      "cells_retained": 7186,
+      "cells_total": 7186,
+      "counts_sha256": "a0512f2b069484e63c2025c56200a280613290735abedf68b21d30f968def768",
+      "full_h5ad": "GSE115978_ALL_7186_raw_counts.h5ad",
+      "genes": 23686,
+      "h5ad_dtype": "int32",
+      "h5ad_encoding": "dense_dataset",
+      "h5ad_shape_cells_by_genes": [
+        7186,
+        23686
+      ],
+      "large_matrix_drive": {
+        "file_id": "1rSXR9BWgfESPz2ubTctsZ5paqsFU8LAA",
+        "size_bytes": 81957612
+      },
+      "pseudobulk_shape_genes_by_samples": [
+        23686,
+        33
+      ],
+      "sample_metadata_rows": 33,
+      "samples": 33,
+      "status": "COMPLETE_ALL_CELLS"
+    },
+    "GSE120575": {
+      "cell_subsampling": false,
+      "cells_retained": 16291,
+      "cells_total": 16291,
+      "full_matrix_file": "GSE120575_ALL_16291_TPM_gene_by_cell.h5",
+      "full_matrix_orientation": "genes_by_cells",
+      "genes_retained": 55737,
+      "genes_subsampled": false,
+      "large_matrix_drive": {
+        "file_id": "156m8CGGjL21VzAdCS0VGJhAroz6fHOXV",
+        "size_bytes": 251664806
+      },
+      "memory_policy": "streaming_32_genes_per_block",
+      "patient_state_metadata_rows": 48,
+      "patient_states": 48,
+      "patients": 37,
+      "pseudobulk_shape_genes_by_patient_states": [
+        55737,
+        48
+      ],
+      "rows_inspected": 55737,
+      "status": "COMPLETE_ALL_CELLS_STREAMING",
+      "tpm_sha256": "43fa3d50acd151be89aa8e94ac83cc730dbbf7623473339c5534b77c16d48e3f"
+    },
+    "GSE179994": {
+      "cell_metadata_rows": 150849,
+      "cell_subsampling": false,
+      "cells_retained": 150849,
+      "cells_total": 150849,
+      "full_csc_bundle": "GSE179994_ALL_150849_full_csc_bundle",
+      "full_csc_bundle_drive": {
+        "folder_id": "1wvyGvLNZeOI7ghONRGFoLBiRETUaFdgQ",
+        "nnz": 205034916
+      },
+      "full_csc_bundle_written": true,
+      "full_h5ad": "GSE179994_ALL_150849_raw_counts.h5ad",
+      "full_h5ad_status": "WRITTEN",
+      "full_pseudobulk_written": true,
+      "genes": 19790,
+      "labelled_patients": 11,
+      "labelled_target_lesions": 13,
+      "large_matrix_drive": {
+        "file_id": "1iKhDmms8CzUe1wgb6knq_Vmkv_uCncQ3",
+        "size_bytes": 487254130
+      },
+      "mixed_response_patients": [
+        "P1",
+        "P13"
+      ],
+      "nnz": 205034916,
+      "nonresponsive_target_lesions": 5,
+      "outcome_mapping_status": "CORRECTED_TO_OFFICIAL_LESION_LEVEL",
+      "patient_level_response_mapping_status": "INVALID_NOT_USED",
+      "patients": 36,
+      "pseudobulk_shape_genes_by_samples": [
+        19790,
+        47
+      ],
+      "r_object_size_gb": 2.30556302517653,
+      "rds_sha256": "8275907e6a341048c89d30cb6485dd81125f8922c952d0cd648cf6a3acaa1cc0",
+      "responsive_target_lesions": 8,
+      "sample_metadata_rows": 47,
+      "samples": 47,
+      "status": "COMPLETE_ALL_CELLS_SPARSE",
+      "unique_cell_ids": 150849,
+      "unlabelled_patients_excluded_from_outcomes": 25
+    }
+  },
+  "official_lesion_mapping_status": "VALIDATED",
+  "outcome_unit": "target_lesion",
+  "patient_level_response_mapping_status": "INVALID_NOT_USED",
+  "response_transfer_proxy_status": "COMPUTED_SEPARATELY",
+  "status": "STAGE1_FULL_CELLS_VALIDATED"
+}

@@ -1,0 +1,46 @@
+{
+  "release": "0.5.0a1",
+  "release_type": "github_prerelease",
+  "scientific_status": {
+    "v0.4_static_temporal_benchmark": "FINAL_NOT_SUPPORTED",
+    "v0.5_contextual_benchmark": "PROSPECTIVE_NOT_COMPUTED",
+    "future_labels_accessed": false
+  },
+  "engineering": {
+    "pytest_passed": 70,
+    "branch_coverage_percent": 86.78,
+    "coverage_threshold_percent": 85.0,
+    "ruff_check": "PASS",
+    "ruff_format": "PASS",
+    "compileall": "PASS",
+    "wheel_smoke": "PASS",
+    "mypy_strict": "NOT_PASS_ALPHA_DEBT"
+  },
+  "temporal_benchmark": {
+    "candidate_genes": 17527,
+    "indications": 23,
+    "development_rows": 321222,
+    "development_positives": 42,
+    "holdout_rows": 79542,
+    "holdout_genes": 3476,
+    "holdout_positives": 14,
+    "primary_method": "geneformer_static_plus_cheap",
+    "primary_comparator": "cheap_historical",
+    "primary_metric": "pooled_auprc",
+    "point_delta": -0.0003275548642991,
+    "ci_95": [
+      -0.0094848274680891,
+      0.0013916328916157
+    ],
+    "conclusion": "NOT_SUPPORTED"
+  },
+  "prospective_contextual_protocol": {
+    "information_cutoff": "2026-08-04",
+    "outcome_window_start": "2026-08-05",
+    "first_eligible_snapshot": "2027-02-04",
+    "primary_method": "geneformer_contextual_plus_cheap",
+    "secondary_method": "scgpt_contextual_plus_cheap",
+    "matched_random_controls": true,
+    "contextual_gpu_execution": "NOT_RUN_REQUIRES_COLAB_GPU"
+  }
+}

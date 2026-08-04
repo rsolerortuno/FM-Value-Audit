@@ -1,0 +1,17 @@
+analysis,method,spearman,patients,responsive_lesions,nonresponsive_lesions
+all_official_target_lesions,direct_melanoma_delta,0.06229282284933241,11,8,5
+all_official_target_lesions,manual_features,0.09424070959091212,11,8,5
+all_official_target_lesions,geneformer_static_pca32,0.14617330321373126,11,8,5
+all_official_target_lesions,scgpt_static_pca32,0.071274183505142,11,8,5
+all_official_target_lesions,geneformer_random_pca32,0.0015382999658712358,11,8,5
+all_official_target_lesions,scgpt_random_pca32,0.007539873124913496,11,8,5
+all_official_target_lesions,manual_plus_geneformer_pca32,0.14277180235208461,11,8,5
+all_official_target_lesions,manual_plus_scgpt_pca32,0.06335418252980447,11,8,5
+exclude_mixed_response_patients,direct_melanoma_delta,0.08515874441215987,9,6,3
+exclude_mixed_response_patients,manual_features,0.10557328896834609,9,6,3
+exclude_mixed_response_patients,geneformer_static_pca32,0.15410864814680472,9,6,3
+exclude_mixed_response_patients,scgpt_static_pca32,0.08317876775990693,9,6,3
+exclude_mixed_response_patients,geneformer_random_pca32,0.004512175812827069,9,6,3
+exclude_mixed_response_patients,scgpt_random_pca32,0.006339356909143319,9,6,3
+exclude_mixed_response_patients,manual_plus_geneformer_pca32,0.15067416290723623,9,6,3
+exclude_mixed_response_patients,manual_plus_scgpt_pca32,0.07578048460555936,9,6,3

@@ -1,0 +1,70 @@
+{
+  "models": [
+    {
+      "model_id": "random_mlp_small",
+      "family": "local_random_mlp",
+      "availability": "EXECUTED",
+      "executed_in_committed_run": true,
+      "leakage_status": "RESOLVED_CLEAN",
+      "checkpoint_identifier": "local://random-mlp-small",
+      "version": "1.0.0",
+      "licence": "Apache-2.0",
+      "result_status": "EXECUTED_SYNTHETIC"
+    },
+    {
+      "model_id": "random_mlp_large",
+      "family": "local_random_mlp",
+      "availability": "EXECUTED",
+      "executed_in_committed_run": true,
+      "leakage_status": "RESOLVED_CLEAN",
+      "checkpoint_identifier": "local://random-mlp-large",
+      "version": "1.0.0",
+      "licence": "Apache-2.0",
+      "result_status": "EXECUTED_SYNTHETIC"
+    },
+    {
+      "model_id": "geneformer_v1_10m",
+      "family": "geneformer",
+      "availability": "EXECUTED_SUBSET",
+      "executed_in_committed_run": true,
+      "leakage_status": "UNRESOLVED",
+      "checkpoint_identifier": "local-drive://Geneformer-V1-10M/model.safetensors#sha256=a5e33a757431643b3697de7ef6127950cdc49e06e58d4266b3a3ab191b683f14",
+      "version": "Geneformer-V1-10M",
+      "licence": "Apache-2.0",
+      "result_status": "EXECUTED_REPRESENTATION_SUBSET"
+    },
+    {
+      "model_id": "geneformer_v1_10m_random",
+      "family": "geneformer_random_initialisation",
+      "availability": "EXECUTED_SUBSET",
+      "executed_in_committed_run": true,
+      "leakage_status": "RESOLVED_CLEAN",
+      "checkpoint_identifier": "local://shape-matched-geneformer-v1-10m-random-seed-20260729",
+      "version": "0.2.0",
+      "licence": "Apache-2.0",
+      "result_status": "EXECUTED_REPRESENTATION_SUBSET"
+    },
+    {
+      "model_id": "scgpt_whole_human",
+      "family": "scgpt",
+      "availability": "EXECUTED_SUBSET",
+      "executed_in_committed_run": true,
+      "leakage_status": "UNRESOLVED",
+      "checkpoint_identifier": "local-drive://scGPT-whole-human/best_model.pt#sha256=6cb5d451ab5c4b33eb673adbe4fddc61d2389df1b89b7651a9fe2e557572b922",
+      "version": "whole-human checkpoint downloaded 2026-07-29",
+      "licence": "MIT code; checkpoint terms not separately stated",
+      "result_status": "EXECUTED_REPRESENTATION_SUBSET"
+    },
+    {
+      "model_id": "scgpt_whole_human_random",
+      "family": "scgpt_random_initialisation",
+      "availability": "EXECUTED_SUBSET",
+      "executed_in_committed_run": true,
+      "leakage_status": "RESOLVED_CLEAN",
+      "checkpoint_identifier": "local://shape-matched-scgpt-whole-human-random-seed-20260729",
+      "version": "0.2.0",
+      "licence": "Apache-2.0",
+      "result_status": "EXECUTED_REPRESENTATION_SUBSET"
+    }
+  ]
+}

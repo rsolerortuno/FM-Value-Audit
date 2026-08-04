@@ -1,0 +1,42 @@
+{
+  "gpu_hours": 0.0,
+  "hardware_note": "Times are measurements from the current sandbox and are not portable benchmarks.",
+  "models": [
+    {
+      "cells": 12,
+      "claim_scope": "REPRESENTATION_SANITY_ONLY_NOT_TARGET_EVALUATION",
+      "execution_status": "EXECUTED_CPU_SUBSET",
+      "model_id": "geneformer_v1_10m",
+      "parameter_count": 10199040,
+      "peak_rss_mb": 416.26953125,
+      "pretrained_wall_seconds": 0.13258377099987229,
+      "random_wall_seconds": 0.031948691000025065,
+      "sequence_length": 64
+    },
+    {
+      "cells": 12,
+      "claim_scope": "REPRESENTATION_SANITY_ONLY_NOT_TARGET_EVALUATION",
+      "execution_status": "EXECUTED_CPU_SUBSET",
+      "model_id": "scgpt_whole_human",
+      "parameter_count": 50278400,
+      "peak_rss_mb": 753.21875,
+      "pretrained_wall_seconds": 0.25638362300014705,
+      "random_wall_seconds": 0.11774438299994472,
+      "sequence_length": 64
+    }
+  ],
+  "preprocessing": [
+    {
+      "dataset": "GSE115978",
+      "device": "CPU",
+      "scope": "full feature aggregation",
+      "wall_seconds": 31.846226930618286
+    },
+    {
+      "dataset": "GSE120575",
+      "device": "CPU",
+      "scope": "full-file scan; features restricted to GSE115978 gene universe",
+      "wall_seconds": 64.03569865226746
+    }
+  ]
+}

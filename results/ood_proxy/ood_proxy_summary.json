@@ -1,0 +1,51 @@
+{
+  "best_method_by_ood_spearman": "geneformer_static_pca32",
+  "best_ood_spearman": 0.14617330321373126,
+  "bootstrap_iterations": 1000,
+  "checkpoint_gene_coverage": {
+    "geneformer": 0.9702205678093228,
+    "joint": 0.9694983054614146,
+    "scgpt": 0.9827768209344964
+  },
+  "claim_scope": "RESPONSE_TRANSFER_PROXY_NOT_CLINICAL_TARGET_EVALUATION",
+  "clinical_target_metrics_status": "NOT_COMPUTED",
+  "direct_melanoma_delta_ood_spearman": 0.06229282284933241,
+  "gene_folds": 5,
+  "geneformer_bootstrap_ci_high": 0.18746596738175456,
+  "geneformer_bootstrap_ci_low": 0.00028501296218386596,
+  "geneformer_excluding_mixed_patients_ood_spearman": 0.15410864814680472,
+  "geneformer_leave_one_patient_out_median_spearman": 0.14399106181611324,
+  "geneformer_ood_spearman": 0.14617330321373126,
+  "genes_shared_all_datasets": 17999,
+  "genes_shared_models_and_datasets": 17450,
+  "limitations": [
+    "Static checkpoint token embeddings, not contextual gene embeddings.",
+    "NSCLC outcome is lesion-level: 8 responsive and 5 non-responsive target lesions across 11 patients.",
+    "P001 and P013 contain discordant lesion responses and are preserved as mixed-response patients.",
+    "Post-treatment transfer proxy, not a baseline clinical-response predictor.",
+    "Genes are analysis units and are not statistically independent.",
+    "Pretraining accession overlap remains unresolved."
+  ],
+  "manual_features_ood_spearman": 0.09424070959091212,
+  "melanoma_post_nonresponder_states": 21,
+  "melanoma_post_responder_states": 8,
+  "nsclc_labeled_nonresponder_lesions": 5,
+  "nsclc_labeled_patients": 11,
+  "nsclc_labeled_responder_lesions": 8,
+  "nsclc_mixed_response_patients": [
+    "P1",
+    "P13"
+  ],
+  "nsclc_unlabelled_patients_excluded_from_outcome": 25,
+  "paired_geneformer_minus_direct_ci_high": 0.140006697947955,
+  "paired_geneformer_minus_direct_ci_low": 0.005390989224206748,
+  "paired_geneformer_minus_direct_median": 0.07066161032731355,
+  "paired_geneformer_minus_random_ci_high": 0.1847551796986822,
+  "paired_geneformer_minus_random_ci_low": 0.004913933640329834,
+  "paired_geneformer_minus_random_median": 0.123140711326557,
+  "pca_components": 32,
+  "pretraining_leakage_status": "UNRESOLVED",
+  "scgpt_ood_spearman": 0.071274183505142,
+  "seed": 1729,
+  "status": "COMPUTED_RESPONSE_TRANSFER_PROXY"
+}

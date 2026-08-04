@@ -1,0 +1,9 @@
+{
+  "documented_corpus_identifier_count": 1,
+  "evaluation_identifier_count": 1,
+  "model_id": "external_geneformer",
+  "overlap_count": 0,
+  "overlap_identifiers": [],
+  "reason": "Pretraining corpus documentation is incomplete or explicitly unresolved.",
+  "status": "UNRESOLVED"
+}

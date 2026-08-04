@@ -1,0 +1,35 @@
+{
+  "expanded_sensitivity": {
+    "candidate_genes": 17527,
+    "development_positives": 39,
+    "development_rows": 323150,
+    "development_window_end": "2024-12-31",
+    "holdout_gene_fold": 0,
+    "holdout_positives": 16,
+    "holdout_rows": 79971,
+    "holdout_window_start": "2025-01-01",
+    "indications": 23,
+    "total_candidate_rows": 403121,
+    "total_eligible_positives": 125
+  },
+  "important": "The expanded sensitivity definition is not silently promoted to the primary endpoint when the strict endpoint fails.",
+  "status": "STRICT_PRIMARY_PASS",
+  "strict_primary": {
+    "candidate_genes": 17527,
+    "development_positives": 26,
+    "development_rows": 323150,
+    "development_window_end": "2024-12-31",
+    "holdout_gene_fold": 0,
+    "holdout_positives": 14,
+    "holdout_rows": 79971,
+    "holdout_window_start": "2025-01-01",
+    "indications": 23,
+    "total_candidate_rows": 403121,
+    "total_eligible_positives": 94
+  },
+  "thresholds": {
+    "minimum_development_positives": 10,
+    "minimum_holdout_positives": 5,
+    "minimum_total_positives": 20
+  }
+}

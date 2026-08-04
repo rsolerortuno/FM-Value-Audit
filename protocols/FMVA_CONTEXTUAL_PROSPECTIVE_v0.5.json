@@ -1,0 +1,156 @@
+{
+  "candidate_universe": "The v0.4.0 wide solid-tumour candidate universe, updated only for identifier retirements and additions documented before the 2026-08-04 cutoff.",
+  "context_definition": {
+    "cohorts": {
+      "GSE115978": {
+        "disease": "melanoma",
+        "input_scale": "raw_counts",
+        "response_policy": "use supplied response only when explicitly present",
+        "role": "melanoma treatment-context cells"
+      },
+      "GSE120575": {
+        "disease": "melanoma",
+        "input_scale": "TPM",
+        "response_policy": "excluded from contextual encoder input because counts are TPM",
+        "role": "manual-feature baseline only"
+      },
+      "GSE179994": {
+        "disease": "nsclc",
+        "input_scale": "raw_counts",
+        "response_policy": "official lesion-level mapping; never patient-collapsed",
+        "role": "independent lesion-response and treatment-context cells"
+      }
+    },
+    "fields": [
+      "disease",
+      "cell_compartment",
+      "treatment_state",
+      "response_state"
+    ],
+    "missing_value": "unknown"
+  },
+  "endpoint": "First public ClinicalTrials.gov Phase I-or-later entry after 2026-08-04 for a single-direct-human-target therapeutic intervention in a prespecified solid-tumour indication, excluding target-indication pairs with a qualifying entry on or before the cutoff.",
+  "forbidden_actions": [
+    "Reuse v0.4.0 holdout labels as an independent v0.5 evaluation.",
+    "Choose the snapshot date after inspecting model scores or metrics.",
+    "Change sampling, context definitions, PCA budget or alpha grid after future labels open.",
+    "Promote a secondary method to confirmatory status after results are known.",
+    "Treat GSE120575 TPM as raw-count input to Geneformer or scGPT.",
+    "Collapse discordant GSE179994 lesions to a patient-level response label."
+  ],
+  "frozen_at_utc": "2026-08-04T15:37:00Z",
+  "gene_split": {
+    "algorithm": "sha256_modulo",
+    "development_folds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "gene_disjoint": true,
+    "holdout_fold": 0,
+    "modulus": 5,
+    "salt": "fmva-v0.5-prospective-gene-split-20260804"
+  },
+  "historical_snapshots": {
+    "chembl": "37",
+    "clinicaltrials_version_endpoint": "https://clinicaltrials.gov/api/v2/version",
+    "open_targets": "26.06",
+    "publication_cutoff": "2026-08-04"
+  },
+  "information_cutoff": "2026-08-04",
+  "known_limitations": [
+    "Geneformer and scGPT pretraining-accession overlap remains unresolved.",
+    "Only melanoma and NSCLC provide real raw-count cellular contexts.",
+    "The clinical endpoint is operational and sparse; absence of entry is not biological failure.",
+    "The final v0.5 result cannot exist until a scheduled future snapshot passes the power gate."
+  ],
+  "methods": [
+    {
+      "claim_role": "primary_baseline",
+      "embedding_width": 1,
+      "model_id": "cheap_historical",
+      "pooling": "not_applicable",
+      "random_control": "not_applicable",
+      "representation": "Open Targets 26.06 + ChEMBL 37 + pre-cutoff popularity",
+      "sequence_length": 2
+    },
+    {
+      "claim_role": "confirmatory_primary",
+      "embedding_width": 256,
+      "model_id": "geneformer_contextual_plus_cheap",
+      "pooling": "token-to-gene mean within sample-context, then equal-weight sample mean",
+      "random_control": "geneformer_random_contextual_plus_cheap",
+      "representation": "Geneformer V1-10M final token hidden states from real cells",
+      "sequence_length": 512
+    },
+    {
+      "claim_role": "negative_control",
+      "embedding_width": 256,
+      "model_id": "geneformer_random_contextual_plus_cheap",
+      "pooling": "identical to pretrained",
+      "random_control": "self",
+      "representation": "shape-matched random Geneformer token hidden states",
+      "sequence_length": 512
+    },
+    {
+      "claim_role": "secondary",
+      "embedding_width": 512,
+      "model_id": "scgpt_contextual_plus_cheap",
+      "pooling": "token-to-gene mean within sample-context, then equal-weight sample mean",
+      "random_control": "scgpt_random_contextual_plus_cheap",
+      "representation": "scGPT whole-human final gene-token hidden states from real cells",
+      "sequence_length": 512
+    },
+    {
+      "claim_role": "negative_control",
+      "embedding_width": 512,
+      "model_id": "scgpt_random_contextual_plus_cheap",
+      "pooling": "identical to pretrained",
+      "random_control": "self",
+      "representation": "shape-matched random scGPT gene-token hidden states",
+      "sequence_length": 512
+    }
+  ],
+  "outcome_window_end_rule": "Use the first scheduled snapshot satisfying the power gate, without inspecting any method scores or performance; otherwise stop at the maximum snapshot date and abstain.",
+  "outcome_window_start": "2026-08-05",
+  "power_gate": {
+    "minimum_holdout_positive_genes": 5,
+    "minimum_holdout_positive_pairs": 5,
+    "minimum_indications_with_positive": 5,
+    "minimum_positive_genes": 10,
+    "minimum_positive_pairs": 20
+  },
+  "primary_contrast": {
+    "decision_rule": "SUPPORTED only when the paired gene-bootstrap 95% interval for delta AUPRC is strictly above zero; otherwise NOT_SUPPORTED or DETECTABLE_LOSS.",
+    "method": "geneformer_contextual_plus_cheap",
+    "metric": "AUPRC",
+    "reference": "cheap_historical"
+  },
+  "protocol_id": "fmva-contextual-prospective-2026-08-04",
+  "release_target": "0.5.0",
+  "sampling": {
+    "maximum_cells_per_sample_context": 32,
+    "minimum_cells_per_sample_context": 4,
+    "sample_balanced_pooling": true,
+    "seed": 20260804,
+    "selection": "lowest_sha256(cell_id + seed) within each sample-context stratum",
+    "unit": "real_single_cell"
+  },
+  "schema_version": "fmva-contextual-protocol-v1",
+  "secondary_methods": [
+    "scgpt_contextual_plus_cheap",
+    "geneformer_random_contextual_plus_cheap",
+    "scgpt_random_contextual_plus_cheap",
+    "manual_transcriptomic_plus_cheap",
+    "geneformer_static_plus_cheap",
+    "scgpt_static_plus_cheap"
+  ],
+  "snapshot_schedule": {
+    "cadence_months": 3,
+    "first_eligible_snapshot": "2027-02-04",
+    "maximum_snapshot_date": "2028-08-04",
+    "selection_rule": "Evaluate snapshots in chronological order and select the first that passes the label-only power gate. Model scores remain inaccessible during gate assessment."
+  },
+  "status": "FROZEN_BEFORE_CONTEXTUAL_MODEL_EXECUTION_AND_FUTURE_LABEL_ACCESS"
+}

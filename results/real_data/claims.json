@@ -1,0 +1,20 @@
+{
+  "conditional": [
+    "The committed real-data features can be used after a cutoff-correct clinical-label and popularity layer is frozen.",
+    "The minimal CPU encoders are suitable for reproducibility checks; full upstream-package runs should be compared before scientific publication."
+  ],
+  "leakage_status": "UNRESOLVED",
+  "permitted": [
+    "The Drive split files reconstruct byte-exactly to the original GSE179994, GSE120575, and scGPT files.",
+    "GSE115978 was aggregated into sample-level features for 23686 genes across 33 cohort-aware samples.",
+    "GSE120575 was aggregated into patient-state features for 21957 genes across 48 patient states.",
+    "Geneformer V1-10M and scGPT whole-human produced finite frozen embeddings on the committed CPU subset."
+  ],
+  "target_ranking_status": "NOT_COMPUTED",
+  "unsupported": [
+    "Either foundation model improves target prioritisation.",
+    "Pretraining beats architecture-matched random initialisation.",
+    "The models generalise from melanoma to NSCLC.",
+    "Any gene in the feature table is a recommended therapeutic target."
+  ]
+}

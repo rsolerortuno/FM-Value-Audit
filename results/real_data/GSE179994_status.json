@@ -1,0 +1,21 @@
+{
+  "celltype_counts": {
+    "CD4": 58706,
+    "CD8": 59656,
+    "UNANNOTATED": 32487
+  },
+  "dataset_id": "GSE179994",
+  "gzip_integrity_verified": true,
+  "matrix_file": "GSE179994_all.Tcell.rawCounts.rds.gz",
+  "matrix_md5": "a0abd966fec8109c03605c1873e3627f",
+  "matrix_parse_reason": "The sandbox has no R runtime and its package index lacks a compatible RDS/S4 Matrix reader. The byte-exact matrix is retained and the Colab R conversion path is provided.",
+  "matrix_parse_status": "NOT_COMPUTED_LOCAL",
+  "matrix_sha256": "8275907e6a341048c89d30cb6485dd81125f8922c952d0cd648cf6a3acaa1cc0",
+  "matrix_size_bytes": 441470188,
+  "metadata_cells": 150849,
+  "patients": 36,
+  "samples": 47,
+  "split_parts": 5,
+  "split_reassembly_verified": true,
+  "target_evaluation_status": "NOT_COMPUTED"
+}

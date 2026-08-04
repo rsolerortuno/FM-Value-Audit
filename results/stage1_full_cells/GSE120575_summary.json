@@ -1,0 +1,15 @@
+{
+  "cell_subsampling": false,
+  "cells_retained": 16291,
+  "cells_total": 16291,
+  "full_matrix_file": "GSE120575_ALL_16291_TPM_gene_by_cell.h5",
+  "full_matrix_orientation": "genes_by_cells",
+  "genes_retained": 55737,
+  "genes_subsampled": false,
+  "memory_policy": "streaming_32_genes_per_block",
+  "patient_states": 48,
+  "patients": 37,
+  "rows_inspected": 55737,
+  "status": "COMPLETE_ALL_CELLS_STREAMING",
+  "tpm_sha256": "43fa3d50acd151be89aa8e94ac83cc730dbbf7623473339c5534b77c16d48e3f"
+}

@@ -1,0 +1,106 @@
+{
+  "bundle": "temporal_benchmark_v0.4",
+  "included_files": [
+    {
+      "bytes": 6756,
+      "path": "INTEGRATION_AUDIT.json",
+      "sha256": "a8251a75373856e31af69f742d7fd711546a16ef88354b3d4e96d3cdc25f033f"
+    },
+    {
+      "bytes": 420,
+      "path": "stage2a/PRE_CUTOFF_MAPPING_COVERAGE.json",
+      "sha256": "7ff9e2b93a790f5f182bbdfb1aeaae2c072d2ef71a9a5aa2c63cd80f23c98554"
+    },
+    {
+      "bytes": 6528,
+      "path": "stage2a/STAGE2A_WIDE_MANIFEST.json",
+      "sha256": "f29a9979abf42b119de3a4da3f98d9ff8c15be07d68fceb41b06590534121205"
+    },
+    {
+      "bytes": 1086,
+      "path": "stage2a/STAGE2A_WIDE_POWER_GATE.json",
+      "sha256": "d88729b4fea31a6f23f8b48e7fc83a148197f5af61a4e19449a283e23baef4c1"
+    },
+    {
+      "bytes": 3086,
+      "path": "stage2b/STAGE2B_WIDE_MANIFEST.json",
+      "sha256": "9fe74d1f577e49887723566c860c67aad83a97f5ca573e68c20e253dae7bb3f7"
+    },
+    {
+      "bytes": 964,
+      "path": "stage2b/holdout_seal.json",
+      "sha256": "2cf95352f6983904a86f63a0e4d38791bb126e844ac9fcf406dcacf6f027b2cb"
+    },
+    {
+      "bytes": 1131,
+      "path": "stage3a/STAGE3A_MANIFEST.json",
+      "sha256": "a1aa1448edc95731943d1daf65788cb00eacad503322d670894c64f703be09bd"
+    },
+    {
+      "bytes": 4618,
+      "path": "stage3a/configuration_freeze.json",
+      "sha256": "879fbd5f585856c38554541f4b6e018ac011a166953f912a93014df650062c24"
+    },
+    {
+      "bytes": 1873,
+      "path": "stage3a/development_metrics.csv",
+      "sha256": "2806d4125e91b270346293fee06c081de8be18108c196420c4f1e476d2140553"
+    },
+    {
+      "bytes": 2663,
+      "path": "stage3a/development_tuning_effort.csv",
+      "sha256": "83ce15b0f48b0c75241a2581f7289049cc5aebc4a5f2d48de3af8373e72fd3cd"
+    },
+    {
+      "bytes": 5464,
+      "path": "stage3b/FINAL_HOLDOUT_REPORT.md",
+      "sha256": "1f34f312907c808723f30a034b87219642e4a896a63bcc219052432b44719434"
+    },
+    {
+      "bytes": 2999,
+      "path": "stage3b/STAGE3B_MANIFEST.json",
+      "sha256": "4e3c97a9d691133617c1fb8f2af24323b738b65bde85fcb269717540253bddf7"
+    },
+    {
+      "bytes": 1636,
+      "path": "stage3b/bootstrap_summary.csv",
+      "sha256": "884e676cfb449f8562b0babbebe86abccaa3cd317d0d6a95a3e8b1d13713c01a"
+    },
+    {
+      "bytes": 400,
+      "path": "stage3b/clinical_ood_delta.csv",
+      "sha256": "b82dae31f8d92eb89bb2a319f9d5fc1022226da67afd5e87fed43ec5651f7610"
+    },
+    {
+      "bytes": 2440,
+      "path": "stage3b/clinical_ood_metrics.csv",
+      "sha256": "688ba176850d3d7eb6e78c02cd36c09c63d0e8a23dc7a241e87e20772bfcabd9"
+    },
+    {
+      "bytes": 2571,
+      "path": "stage3b/final_holdout_metrics.csv",
+      "sha256": "e393ae8cf85f1a4ce135d323b9c31776bd2ba81a827da2650a248fda02ed2797"
+    },
+    {
+      "bytes": 403,
+      "path": "stage3b/primary_conclusion.json",
+      "sha256": "a54b12cfde61283d25054617044cc9d243556ea434868a0597e06bf643fd856e"
+    }
+  ],
+  "integrity_model": "Included files are checked byte-for-byte against hashes frozen in the original manifests wherever a source manifest declares that file. Omitted large artefacts remain cross-linked by their recorded hashes.",
+  "known_warning": "STAGE2B_WIDE_MANIFEST.json reports at_risk_rows=400778 while development_rows + holdout_rows = 400764 (delta 14). Downstream sealed counts are mutually consistent; the original manifest is preserved unchanged.",
+  "omitted_large_artifacts": [
+    "clinical trial snapshots and intervention mappings",
+    "development_labels_features.parquet",
+    "holdout_candidate_predictors.parquet",
+    "holdout_labels.parquet",
+    "development_oof_predictions.parquet",
+    "holdout_method_scores_frozen.parquet",
+    "final_holdout_predictions.parquet",
+    "paired_gene_bootstrap_2000.parquet"
+  ],
+  "purpose": "Compact, hash-linked reference bundle for validating Stage 2A-WIDE through Stage 3B without redistributing large Parquet predictions or source snapshots.",
+  "release": "0.4.0",
+  "source_project_tree": "temporal_benchmark/",
+  "status": "PASS_WITH_WARNINGS"
+}

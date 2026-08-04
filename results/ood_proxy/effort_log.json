@@ -1,0 +1,9 @@
+{
+  "blas_threads": 1,
+  "bootstrap_iterations": 1000,
+  "claim_scope": "RESPONSE_TRANSFER_PROXY_NOT_CLINICAL_TARGET_EVALUATION",
+  "command": "fmva response-transfer-proxy",
+  "genes_evaluated": 17450,
+  "peak_rss_mb": 966.1484375,
+  "wall_seconds": 32.34
+}

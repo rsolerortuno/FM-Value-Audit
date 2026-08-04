@@ -1,0 +1,70 @@
+schema_version: "1.0"
+models:
+  - model_id: random_mlp_small
+    family: local_random_mlp
+    checkpoint_identifier: local://random-mlp-small
+    version: "1.0.0"
+    licence: Apache-2.0
+    documented_pretraining_corpora: []
+    parameter_count: 248
+    leakage_status: RESOLVED_CLEAN
+    availability: EXECUTED
+    enabled_by_default: true
+    notes: Randomly initialised local control executed on the synthetic benchmark.
+  - model_id: random_mlp_large
+    family: local_random_mlp
+    checkpoint_identifier: local://random-mlp-large
+    version: "1.0.0"
+    licence: Apache-2.0
+    documented_pretraining_corpora: []
+    parameter_count: 2528
+    leakage_status: RESOLVED_CLEAN
+    availability: EXECUTED
+    enabled_by_default: false
+    notes: Larger random control used only for the synthetic scale ablation.
+  - model_id: geneformer_v1_10m
+    family: geneformer
+    checkpoint_identifier: local-drive://Geneformer-V1-10M/model.safetensors#sha256=a5e33a757431643b3697de7ef6127950cdc49e06e58d4266b3a3ab191b683f14
+    version: Geneformer-V1-10M
+    licence: Apache-2.0
+    documented_pretraining_corpora:
+      - Genecorpus-30M documentation claim; dataset-level overlap unresolved
+    parameter_count: 10290770
+    leakage_status: UNRESOLVED
+    availability: EXECUTED_SUBSET
+    enabled_by_default: false
+    notes: Frozen encoder executed on 12 GSE115978 cells at sequence length 64; not evaluated for target ranking.
+  - model_id: geneformer_v1_10m_random
+    family: geneformer_random_initialisation
+    checkpoint_identifier: local://shape-matched-geneformer-v1-10m-random-seed-20260729
+    version: "0.2.0"
+    licence: Apache-2.0
+    documented_pretraining_corpora: []
+    parameter_count: 10199040
+    leakage_status: RESOLVED_CLEAN
+    availability: EXECUTED_SUBSET
+    enabled_by_default: false
+    notes: Same frozen encoder shape and input as the subset Geneformer run; randomly initialised.
+  - model_id: scgpt_whole_human
+    family: scgpt
+    checkpoint_identifier: local-drive://scGPT-whole-human/best_model.pt#sha256=6cb5d451ab5c4b33eb673adbe4fddc61d2389df1b89b7651a9fe2e557572b922
+    version: whole-human checkpoint downloaded 2026-07-29
+    licence: MIT code; checkpoint terms not separately stated
+    documented_pretraining_corpora:
+      - Approximately 33 million normal human cells according to upstream documentation; dataset-level list unresolved
+    parameter_count: 51330049
+    leakage_status: UNRESOLVED
+    availability: EXECUTED_SUBSET
+    enabled_by_default: false
+    notes: Frozen encoder executed on 12 GSE115978 cells at sequence length 64; not evaluated for target ranking.
+  - model_id: scgpt_whole_human_random
+    family: scgpt_random_initialisation
+    checkpoint_identifier: local://shape-matched-scgpt-whole-human-random-seed-20260729
+    version: "0.2.0"
+    licence: Apache-2.0
+    documented_pretraining_corpora: []
+    parameter_count: 50278400
+    leakage_status: RESOLVED_CLEAN
+    availability: EXECUTED_SUBSET
+    enabled_by_default: false
+    notes: Same frozen encoder shape and input as the subset scGPT run; randomly initialised.

@@ -1,0 +1,27 @@
+{
+  "GSE115978_counts.csv.gz": {
+    "drive_file_id": "1_b_4mwxV0UoAQdm9nvOIE2IGYprMGc-k",
+    "sha256": "a0512f2b069484e63c2025c56200a280613290735abedf68b21d30f968def768",
+    "size_bytes": 51508919
+  },
+  "GSE120575_Sade_Feldman_melanoma_single_cells_TPM_GEO.txt.gz": {
+    "drive_file_id": "1EHHl-OtW2RiRVK2gnjx262eNVV_Vt1lI",
+    "sha256": "43fa3d50acd151be89aa8e94ac83cc730dbbf7623473339c5534b77c16d48e3f",
+    "size_bytes": 126721504
+  },
+  "GSE179994_all.Tcell.rawCounts.rds.gz": {
+    "drive_file_id": "1N9p5MSKNDi7MS3eg9-xpKa8DjevQ9Y8k",
+    "sha256": "8275907e6a341048c89d30cb6485dd81125f8922c952d0cd648cf6a3acaa1cc0",
+    "size_bytes": 441470188
+  },
+  "Geneformer-V1-10M/model.safetensors": {
+    "drive_file_id": "1RaW_Ki84_uALSc0YNsGzwJ8BnVmZMu6m",
+    "sha256": "a5e33a757431643b3697de7ef6127950cdc49e06e58d4266b3a3ab191b683f14",
+    "size_bytes": 41183536
+  },
+  "scGPT-whole-human/best_model.pt": {
+    "drive_file_id": "1RYDLcAAn_lIB5tS3GcF6PI_gM40M0DFY",
+    "sha256": "6cb5d451ab5c4b33eb673adbe4fddc61d2389df1b89b7651a9fe2e557572b922",
+    "size_bytes": 205385258
+  }
+}

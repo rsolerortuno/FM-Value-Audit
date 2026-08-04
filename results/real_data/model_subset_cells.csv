@@ -1,0 +1,13 @@
+cell_id,sample_id,cell_type,treatment,cohort,no.of.genes,no.of.reads,sample_key,dataset_id
+cy121.1_CD45neg_S301,Mel121.1,?,post.treatment,New,6320,1743629,New|Mel121.1,GSE115978
+cy60_1_cd_45_pos_HC_pos_HLDAR_pos_A09_S969_comb,Mel60,B.cell,post.treatment,Tirosh,3595,39564,Tirosh|Mel60,GSE115978
+cy58_1_CD45_pos_H11_S671_comb,Mel58,Macrophage,post.treatment,Tirosh,8319,426163,Tirosh|Mel58,GSE115978
+cy98_CD45neg_CD90neg_S78,Mel98,Mal,post.treatment,New,7972,497893,New|Mel98,GSE115978
+cy04.3_CD45pos_S32,Mel04.3,T.CD4,post.treatment,New,4408,733310,New|Mel04.3,GSE115978
+Merck_CD45pos_pl4_S21,Mel194,T.CD8,post.treatment,New,4664,694379,New|Mel194,GSE115978
+cy106_CD45pos_S264,Mel106,T.cell,post.treatment,New,4023,1170741,New|Mel106,GSE115978
+cy79_p1_CD45_pos_PD1_neg_AS_C1_R2_D08_S524_comb,Mel79,B.cell,treatment.naive,Tirosh,2850,22786,Tirosh|Mel79,GSE115978
+cy103_CD45neg_CD90neg_S66,Mel103,Mal,treatment.naive,New,1909,123220,New|Mel103,GSE115978
+cy103_CD45pos_S101,Mel103,T.CD4,treatment.naive,New,7348,908402,New|Mel103,GSE115978
+CY89COREQ1_F09_S357_comb,Mel89,T.CD8,treatment.naive,Tirosh,3969,160030,Tirosh|Mel89,GSE115978
+CY89COREQ1_E12_S348_comb,Mel89,T.cell,treatment.naive,Tirosh,2655,47705,Tirosh|Mel89,GSE115978

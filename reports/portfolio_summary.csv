@@ -1,0 +1,10 @@
+section,metric,value,unit,status
+temporal_holdout,candidate_genes,17527,genes,FINAL_V0.4
+temporal_holdout,indications,23,indications,FINAL_V0.4
+temporal_holdout,holdout_rows,79542,target-indication rows,FINAL_V0.4
+temporal_holdout,holdout_positives,14,positive entries,FINAL_V0.4
+primary_contrast,geneformer_static_minus_historical_auprc,-0.0003275548642991,AUPRC delta,NOT_SUPPORTED
+engineering,pytest,70,tests passed,PASS
+engineering,branch_coverage,86.78,percent,PASS
+prospective_v0.5,information_cutoff,2026-08-04,date,FROZEN
+prospective_v0.5,first_eligible_snapshot,2027-02-04,date,NOT_DUE

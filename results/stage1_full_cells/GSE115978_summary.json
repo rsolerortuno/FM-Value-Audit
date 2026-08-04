@@ -1,0 +1,10 @@
+{
+  "cell_subsampling": false,
+  "cells_retained": 7186,
+  "cells_total": 7186,
+  "counts_sha256": "a0512f2b069484e63c2025c56200a280613290735abedf68b21d30f968def768",
+  "full_h5ad": "GSE115978_ALL_7186_raw_counts.h5ad",
+  "genes": 23686,
+  "samples": 33,
+  "status": "COMPLETE_ALL_CELLS"
+}

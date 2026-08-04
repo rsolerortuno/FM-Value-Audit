@@ -1,0 +1,82 @@
+{
+  "cells": 12,
+  "dataset": "GSE115978",
+  "headline_permission": "Representation execution only; no decision-relevant performance claim is permitted.",
+  "leakage_status": "UNRESOLVED",
+  "model_results": {
+    "geneformer_v1_10m": {
+      "cells": 12,
+      "claim_scope": "REPRESENTATION_SANITY_ONLY_NOT_TARGET_EVALUATION",
+      "embedding_width": 256,
+      "execution_status": "EXECUTED_CPU_SUBSET",
+      "finite": true,
+      "geometry_correlation": 0.11335890887864221,
+      "input_gene_coverage": 0.7932533986321033,
+      "model_id": "geneformer_v1_10m",
+      "parameter_count": 10199040,
+      "peak_rss_mb": 416.26953125,
+      "pretrained_variance": 0.7974748611450195,
+      "pretrained_wall_seconds": 0.13258377099987229,
+      "random_variance": 0.3638671934604645,
+      "random_wall_seconds": 0.031948691000025065,
+      "sequence_length": 64
+    },
+    "scgpt_whole_human": {
+      "cells": 12,
+      "claim_scope": "REPRESENTATION_SANITY_ONLY_NOT_TARGET_EVALUATION",
+      "embedding_width": 512,
+      "execution_status": "EXECUTED_CPU_SUBSET",
+      "finite": true,
+      "geometry_correlation": 0.483926350730932,
+      "input_gene_coverage": 0.8783669678290974,
+      "model_id": "scgpt_whole_human",
+      "parameter_count": 50278400,
+      "peak_rss_mb": 753.21875,
+      "pretrained_variance": 0.9358962178230286,
+      "pretrained_wall_seconds": 0.25638362300014705,
+      "random_variance": 0.9999902844429016,
+      "random_wall_seconds": 0.11774438299994472,
+      "sequence_length": 64
+    }
+  },
+  "models": [
+    {
+      "cells": 12,
+      "claim_scope": "REPRESENTATION_SANITY_ONLY_NOT_TARGET_EVALUATION",
+      "embedding_width": 256,
+      "execution_status": "EXECUTED_CPU_SUBSET",
+      "finite": true,
+      "geometry_correlation": 0.11335890887864221,
+      "input_gene_coverage": 0.7932533986321033,
+      "model_id": "geneformer_v1_10m",
+      "parameter_count": 10199040,
+      "peak_rss_mb": 416.26953125,
+      "pretrained_variance": 0.7974748611450195,
+      "pretrained_wall_seconds": 0.13258377099987229,
+      "random_variance": 0.3638671934604645,
+      "random_wall_seconds": 0.031948691000025065,
+      "sequence_length": 64
+    },
+    {
+      "cells": 12,
+      "claim_scope": "REPRESENTATION_SANITY_ONLY_NOT_TARGET_EVALUATION",
+      "embedding_width": 512,
+      "execution_status": "EXECUTED_CPU_SUBSET",
+      "finite": true,
+      "geometry_correlation": 0.483926350730932,
+      "input_gene_coverage": 0.8783669678290974,
+      "model_id": "scgpt_whole_human",
+      "parameter_count": 50278400,
+      "peak_rss_mb": 753.21875,
+      "pretrained_variance": 0.9358962178230286,
+      "pretrained_wall_seconds": 0.25638362300014705,
+      "random_variance": 0.9999902844429016,
+      "random_wall_seconds": 0.11774438299994472,
+      "sequence_length": 64
+    }
+  ],
+  "seed": 20260729,
+  "sequence_length": 64,
+  "subset_policy": "deterministic treatment-by-cell-type coverage then stable fill",
+  "target_ranking_status": "NOT_COMPUTED"
+}

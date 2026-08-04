@@ -1,0 +1,79 @@
+{
+  "GSE120575": {
+    "md5": "8bb26ab1e694c1396de3751695fa90e8",
+    "original_name": "GSE120575_Sade_Feldman_melanoma_single_cells_TPM_GEO.txt.gz",
+    "parts": [
+      {
+        "name": "GSE120575_Sade_Feldman_melanoma_single_cells_TPM_GEO.txt.gz.part001-of-002",
+        "sha256": "c28f4150e8106ae08152c83371432ce964f87231d3423557d2eec2bdea262fc1",
+        "size": 95000000
+      },
+      {
+        "name": "GSE120575_Sade_Feldman_melanoma_single_cells_TPM_GEO.txt.gz.part002-of-002",
+        "sha256": "cbea49d247b9a48ed96b9b345d8755e7b2d4c6c711b9a23ca4785bfed265ed1f",
+        "size": 31721504
+      }
+    ],
+    "sha256": "43fa3d50acd151be89aa8e94ac83cc730dbbf7623473339c5534b77c16d48e3f",
+    "size": 126721504,
+    "verified": true
+  },
+  "GSE179994": {
+    "md5": "a0abd966fec8109c03605c1873e3627f",
+    "original_name": "GSE179994_all.Tcell.rawCounts.rds.gz",
+    "parts": [
+      {
+        "name": "GSE179994_all.Tcell.rawCounts.rds.gz.part001-of-005",
+        "sha256": "e2c634871e113aa744b2d24f53a05b7f9c046247be1c8f47a9f1f03b0fddf867",
+        "size": 95000000
+      },
+      {
+        "name": "GSE179994_all.Tcell.rawCounts.rds.gz.part002-of-005",
+        "sha256": "c1e5c5b5b17d1af792870fa7c3700c848d665136bd8d32194677f85202587a6b",
+        "size": 95000000
+      },
+      {
+        "name": "GSE179994_all.Tcell.rawCounts.rds.gz.part003-of-005",
+        "sha256": "2b891efc9e1e2f4f558e3b8361dfb7b52a901684d73295a688905f949c679018",
+        "size": 95000000
+      },
+      {
+        "name": "GSE179994_all.Tcell.rawCounts.rds.gz.part004-of-005",
+        "sha256": "84484105c5cff7f8bba90fc956b06d6d23a601b83f09a6cad4b0e2f68ec0b7e7",
+        "size": 95000000
+      },
+      {
+        "name": "GSE179994_all.Tcell.rawCounts.rds.gz.part005-of-005",
+        "sha256": "a64143bc2d193bed6724ac5efbf690901c250c06500be08185e72c285da362c2",
+        "size": 61470188
+      }
+    ],
+    "sha256": "8275907e6a341048c89d30cb6485dd81125f8922c952d0cd648cf6a3acaa1cc0",
+    "size": 441470188,
+    "verified": true
+  },
+  "scGPT": {
+    "md5": "9922ec94305126e6e4f9c1575cf493ae",
+    "original_name": "best_model.pt",
+    "parts": [
+      {
+        "name": "best_model.pt.part001-of-003",
+        "sha256": "9ea961bc27b9926a28819ce31d3bef85bbe0a50580af97e284da97c73cb42e3c",
+        "size": 95000000
+      },
+      {
+        "name": "best_model.pt.part002-of-003",
+        "sha256": "f36663b95606cdfd55430b45e54561b977822f69e57914d87c1d67f3919f636a",
+        "size": 95000000
+      },
+      {
+        "name": "best_model.pt.part003-of-003",
+        "sha256": "2114039b68c5bdd7eebdf7ebe91dd1211823709cf22edc30e08e772c7bdff522",
+        "size": 15385258
+      }
+    ],
+    "sha256": "6cb5d451ab5c4b33eb673adbe4fddc61d2389df1b89b7651a9fe2e557572b922",
+    "size": 205385258,
+    "verified": true
+  }
+}

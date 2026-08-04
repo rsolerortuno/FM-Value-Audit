@@ -1,0 +1,14 @@
+lesion_id,patient,lesion_response,biopsy_site,n_biopsies,dataset_samples
+P10|ln metastasis,P10,Responder,ln metastasis,1,P10.post.1
+P13|liver metastasis,P13,Responder,liver metastasis,1,P13.post.1
+P13|ln metastasis,P13,Non-responder,ln metastasis,1,P13.post.2
+P19|ln metastasis,P19,Responder,ln metastasis,1,P19.post.1
+P1|ln metastasis,P1,Responder,ln metastasis,2,P1.post.1;P1.post.2
+P1|right lung tumor,P1,Non-responder,right lung tumor,1,P1.post.3
+P29|left lung tumor,P29,Responder,left lung tumor,1,P29.post.1
+P30|right lung tumor,P30,Responder,right lung tumor,1,P30.post.1
+P33|right lung tumor,P33,Responder,right lung tumor,1,P33.post.1
+P35|right lung tumor,P35,Responder,right lung tumor,1,P35.post.1
+P36|right lung tumor,P36,Non-responder,right lung tumor,1,P36.post.1
+P37|left lung tumor,P37,Non-responder,left lung tumor,1,P37.post.1
+P38|left lung tumor,P38,Non-responder,left lung tumor,1,P38.post.1

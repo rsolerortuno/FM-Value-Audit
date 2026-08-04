@@ -1,0 +1,13 @@
+{
+  "high_confidence_mapped_names": 3263,
+  "high_confidence_target_indication_entries": 2343,
+  "mapping_status_counts": {
+    "AMBIGUOUS_ATTRIBUTABLE_TARGET": 726,
+    "AMBIGUOUS_EXACT_NAME": 398,
+    "HIGH_CONFIDENCE_SINGLE_DIRECT_HUMAN_TARGET": 3283,
+    "NO_ATTRIBUTABLE_TARGET": 4307,
+    "NO_EXACT_MOLECULE_MATCH": 11461
+  },
+  "pre_cutoff_intervention_rows": 109976,
+  "pre_cutoff_unique_mapping_names": 20175
+}

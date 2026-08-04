@@ -1,0 +1,198 @@
+{
+  "candidate_genes": 17527,
+  "clinical_scope": "PRESPECIFIED_SOLID_TUMOUR_PANEL",
+  "conservative_rules": [
+    "Only DRUG and BIOLOGICAL therapeutic interventions are used.",
+    "Only post-cutoff intervention names are mapped directly.",
+    "Prior entry is reconstructed from ChEMBL clinical molecule aliases.",
+    "Truncated or failed target alias profiles cannot create a positive event.",
+    "Strict single-target mappings remain the primary endpoint.",
+    "No holdout labels or model scores are created in Stage 2A-WIDE."
+  ],
+  "cutoff_date": "2023-08-09",
+  "development_end": "2024-12-31",
+  "holdout_start": "2025-01-01",
+  "indications": [
+    {
+      "indication": "pan_solid_tumor",
+      "query": "solid tumor"
+    },
+    {
+      "indication": "melanoma",
+      "query": "melanoma"
+    },
+    {
+      "indication": "nsclc",
+      "query": "non-small cell lung cancer"
+    },
+    {
+      "indication": "sclc",
+      "query": "small cell lung cancer"
+    },
+    {
+      "indication": "breast_cancer",
+      "query": "breast cancer"
+    },
+    {
+      "indication": "colorectal_cancer",
+      "query": "colorectal cancer"
+    },
+    {
+      "indication": "pancreatic_cancer",
+      "query": "pancreatic cancer"
+    },
+    {
+      "indication": "prostate_cancer",
+      "query": "prostate cancer"
+    },
+    {
+      "indication": "ovarian_cancer",
+      "query": "ovarian cancer"
+    },
+    {
+      "indication": "endometrial_cancer",
+      "query": "endometrial cancer"
+    },
+    {
+      "indication": "cervical_cancer",
+      "query": "cervical cancer"
+    },
+    {
+      "indication": "head_neck_cancer",
+      "query": "head and neck squamous cell carcinoma"
+    },
+    {
+      "indication": "renal_cell_carcinoma",
+      "query": "renal cell carcinoma"
+    },
+    {
+      "indication": "urothelial_cancer",
+      "query": "urothelial carcinoma"
+    },
+    {
+      "indication": "hepatocellular_carcinoma",
+      "query": "hepatocellular carcinoma"
+    },
+    {
+      "indication": "biliary_tract_cancer",
+      "query": "biliary tract cancer"
+    },
+    {
+      "indication": "gastric_gej_cancer",
+      "query": "gastric gastroesophageal junction cancer"
+    },
+    {
+      "indication": "esophageal_cancer",
+      "query": "esophageal cancer"
+    },
+    {
+      "indication": "glioma_glioblastoma",
+      "query": "glioblastoma"
+    },
+    {
+      "indication": "sarcoma",
+      "query": "sarcoma"
+    },
+    {
+      "indication": "thyroid_cancer",
+      "query": "thyroid cancer"
+    },
+    {
+      "indication": "mesothelioma",
+      "query": "mesothelioma"
+    },
+    {
+      "indication": "neuroendocrine_tumor",
+      "query": "neuroendocrine tumor"
+    }
+  ],
+  "label_definition": "First public ClinicalTrials.gov interventional treatment Phase I+ posting after cutoff, with no prior same-indication clinical molecule alias match for the attributable target.",
+  "outputs": [
+    {
+      "bytes": 52410,
+      "path": "temporal_benchmark/00_protocol/candidate_gene_universe_wide.csv.gz",
+      "sha256": "b3f3b098fdf9ac576cd55162265b7f6783bc743a258ae1939697a5ddf79ef3b0"
+    },
+    {
+      "bytes": 4638233,
+      "path": "temporal_benchmark/01_clinical_outcomes/wide_solid_tumors/clinical_trial_interventions_wide.parquet",
+      "sha256": "b28f3970aef17c7c326e98e0d3b881fb82590fdd28abd08b85d522472e99be46"
+    },
+    {
+      "bytes": 373723,
+      "path": "temporal_benchmark/01_clinical_outcomes/wide_solid_tumors/drug_target_mapping/post_cutoff_intervention_target_mapping_wide.parquet",
+      "sha256": "2e1de8ad25a4e4828381ce2ab7806fd6fae5e51d45ad2edd9d448fa43721c71e"
+    },
+    {
+      "bytes": 116119,
+      "path": "temporal_benchmark/01_clinical_outcomes/wide_solid_tumors/drug_target_mapping/target_clinical_alias_profiles.parquet",
+      "sha256": "b4afa91d9ca1f6c6e0edfe9716612d02a8f4ccfe2dd493b1889a9b27bb855779"
+    },
+    {
+      "bytes": 37037,
+      "path": "temporal_benchmark/01_clinical_outcomes/wide_solid_tumors/target_indication_events_wide_strict.parquet",
+      "sha256": "4a21def83c60bd2c33053b41937a2a2db6c0bd8e88f164f768f9ca2115d7d38b"
+    },
+    {
+      "bytes": 43580,
+      "path": "temporal_benchmark/01_clinical_outcomes/wide_solid_tumors/target_indication_events_wide_expanded.parquet",
+      "sha256": "8975fb08635d09992f46914652ca198e271ba354c2e7075daf94de2263d3539a"
+    },
+    {
+      "bytes": 45992,
+      "path": "temporal_benchmark/01_clinical_outcomes/wide_solid_tumors/manual_review/wide_non_primary_mappings.csv.gz",
+      "sha256": "61675542f1c08b89c2f78ebf12d297fe54565b05e78e8c6ebaaf23bf67945b9f"
+    },
+    {
+      "bytes": 1086,
+      "path": "temporal_benchmark/01_clinical_outcomes/wide_solid_tumors/STAGE2A_WIDE_POWER_GATE.json",
+      "sha256": "d88729b4fea31a6f23f8b48e7fc83a148197f5af61a4e19449a283e23baef4c1"
+    },
+    {
+      "bytes": 4339211,
+      "path": "temporal_benchmark/03_historical_features/opentargets_release/opentargets_23_06_target_features.parquet",
+      "sha256": "6dcd4bd32934b6306a9dd33bdd7b3ad0ee6892d132ebeea107ad7f66c64166e4"
+    }
+  ],
+  "power_gate": {
+    "expanded_sensitivity": {
+      "candidate_genes": 17527,
+      "development_positives": 39,
+      "development_rows": 323150,
+      "development_window_end": "2024-12-31",
+      "holdout_gene_fold": 0,
+      "holdout_positives": 16,
+      "holdout_rows": 79971,
+      "holdout_window_start": "2025-01-01",
+      "indications": 23,
+      "total_candidate_rows": 403121,
+      "total_eligible_positives": 125
+    },
+    "important": "The expanded sensitivity definition is not silently promoted to the primary endpoint when the strict endpoint fails.",
+    "status": "STRICT_PRIMARY_PASS",
+    "strict_primary": {
+      "candidate_genes": 17527,
+      "development_positives": 26,
+      "development_rows": 323150,
+      "development_window_end": "2024-12-31",
+      "holdout_gene_fold": 0,
+      "holdout_positives": 14,
+      "holdout_rows": 79971,
+      "holdout_window_start": "2025-01-01",
+      "indications": 23,
+      "total_candidate_rows": 403121,
+      "total_eligible_positives": 94
+    },
+    "thresholds": {
+      "minimum_development_positives": 10,
+      "minimum_holdout_positives": 5,
+      "minimum_total_positives": 20
+    }
+  },
+  "power_gate_status": "STRICT_PRIMARY_PASS",
+  "primary_mapping_scope": "A_SINGLE_DIRECT_HUMAN_TARGET",
+  "sensitivity_mapping_scope": "A_SINGLE_DIRECT_HUMAN_TARGET plus B_TWO_DIRECT_HUMAN_TARGETS",
+  "snapshot_time_utc": "2026-08-03T14:20:13.162717+00:00",
+  "stage": "2A-WIDE",
+  "status": "COMPLETE"
+}

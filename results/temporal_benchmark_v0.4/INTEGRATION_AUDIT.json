@@ -1,0 +1,183 @@
+{
+  "errors": [],
+  "files": {
+    "bootstrap_summary": "stage3b/bootstrap_summary.csv",
+    "clinical_ood_delta": "stage3b/clinical_ood_delta.csv",
+    "clinical_ood_metrics": "stage3b/clinical_ood_metrics.csv",
+    "configuration_freeze": "stage3a/configuration_freeze.json",
+    "development_metrics": "stage3a/development_metrics.csv",
+    "development_tuning_effort": "stage3a/development_tuning_effort.csv",
+    "final_holdout_metrics": "stage3b/final_holdout_metrics.csv",
+    "final_report": "stage3b/FINAL_HOLDOUT_REPORT.md",
+    "holdout_seal": "stage2b/holdout_seal.json",
+    "pre_cutoff_coverage": "stage2a/PRE_CUTOFF_MAPPING_COVERAGE.json",
+    "primary_conclusion": "stage3b/primary_conclusion.json",
+    "stage2a_manifest": "stage2a/STAGE2A_WIDE_MANIFEST.json",
+    "stage2a_power_gate": "stage2a/STAGE2A_WIDE_POWER_GATE.json",
+    "stage2b_manifest": "stage2b/STAGE2B_WIDE_MANIFEST.json",
+    "stage3a_manifest": "stage3a/STAGE3A_MANIFEST.json",
+    "stage3b_manifest": "stage3b/STAGE3B_MANIFEST.json"
+  },
+  "invariants": [
+    {
+      "detail": "Stage 2A-WIDE is marked complete.",
+      "name": "stage2a_complete",
+      "status": "PASS"
+    },
+    {
+      "detail": "The pre-specified strict primary endpoint passed its power gate.",
+      "name": "strict_power_gate",
+      "status": "PASS"
+    },
+    {
+      "detail": "The standalone power gate matches the copy embedded in Stage 2A-WIDE.",
+      "name": "power_gate_copy_matches",
+      "status": "PASS"
+    },
+    {
+      "detail": "The committed Stage 2A power-gate file matches its manifest hash.",
+      "name": "stage2a_power_gate_file_hash",
+      "status": "PASS"
+    },
+    {
+      "detail": "Stage 2B-WIDE is marked complete.",
+      "name": "stage2b_complete",
+      "status": "PASS"
+    },
+    {
+      "detail": "The temporal holdout is fixed and gene-disjoint.",
+      "name": "gene_disjoint_holdout",
+      "status": "PASS"
+    },
+    {
+      "detail": "Stage 2B reports at_risk_rows=400778, while development + holdout = 400764; delta=14. The sealed holdout row count is independently consistent downstream, so this is retained as a manifest-accounting warning rather than silently corrected.",
+      "name": "stage2b_row_accounting",
+      "status": "WARNING"
+    },
+    {
+      "detail": "Stage 2A candidate rows minus pre-cutoff exclusions equal Stage 2B at-risk rows.",
+      "name": "pre_cutoff_accounting",
+      "status": "PASS"
+    },
+    {
+      "detail": "The pre-cutoff mapping coverage count equals the exclusions recorded by Stage 2B.",
+      "name": "pre_cutoff_coverage_counts",
+      "status": "PASS"
+    },
+    {
+      "detail": "The committed Stage 2B reference files match their manifest hashes.",
+      "name": "stage2b_reference_file_hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": "Stage 2B row and positive counts match the sealed holdout contract.",
+      "name": "seal_counts_match_stage2b",
+      "status": "PASS"
+    },
+    {
+      "detail": "Stage 3A and Stage 3B reference the exact committed configuration freeze.",
+      "name": "configuration_hash_link",
+      "status": "PASS"
+    },
+    {
+      "detail": "The configuration was frozen and Stage 3A records no holdout-label access.",
+      "name": "configuration_frozen_before_labels",
+      "status": "PASS"
+    },
+    {
+      "detail": "Configuration input hashes match the sealed Stage 2B artefacts.",
+      "name": "seal_hash_links",
+      "status": "PASS"
+    },
+    {
+      "detail": "Stage 3B uses the frozen score hash and sealed label hash.",
+      "name": "stage3b_score_and_label_hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": "The committed Stage 3A diagnostic tables match the frozen output hashes.",
+      "name": "stage3a_reference_file_hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": "Stage 3A completed with the configuration frozen.",
+      "name": "stage3a_complete",
+      "status": "PASS"
+    },
+    {
+      "detail": "Stage 3B completed the one-time final holdout evaluation.",
+      "name": "stage3b_complete",
+      "status": "PASS"
+    },
+    {
+      "detail": "The committed final tables, conclusion and report match Stage 3B output hashes.",
+      "name": "stage3b_reference_file_hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": "The final metric table contains exactly the methods declared by Stage 3B.",
+      "name": "final_method_set",
+      "status": "PASS"
+    },
+    {
+      "detail": "Every final metric row uses the sealed holdout row and positive counts.",
+      "name": "final_metric_counts",
+      "status": "PASS"
+    },
+    {
+      "detail": "The primary AUPRC delta recomputes exactly from final holdout metrics.",
+      "name": "primary_delta_recomputed",
+      "status": "PASS"
+    },
+    {
+      "detail": "The standalone primary conclusion matches the Stage 3B manifest copy.",
+      "name": "primary_conclusion_copy_matches",
+      "status": "PASS"
+    },
+    {
+      "detail": "The primary point estimate, interval and replicate count match bootstrap_summary.csv.",
+      "name": "bootstrap_primary_contrast",
+      "status": "PASS"
+    },
+    {
+      "detail": "The NOT_SUPPORTED conclusion follows from a confidence interval crossing zero.",
+      "name": "conclusion_rule",
+      "status": "PASS"
+    },
+    {
+      "detail": "Clinical OOD delta correctly abstains because the melanoma subset has zero positives.",
+      "name": "clinical_ood_abstention",
+      "status": "PASS"
+    },
+    {
+      "detail": "Development diagnostics and final evaluation use the same method set.",
+      "name": "development_method_set",
+      "status": "PASS"
+    }
+  ],
+  "root": "results/temporal_benchmark_v0.4",
+  "status": "PASS_WITH_WARNINGS",
+  "summary": {
+    "best_final_auprc": 0.0025130283634364,
+    "best_final_auprc_method": "scgpt_static_plus_cheap",
+    "candidate_genes": 17527,
+    "clinical_ood_delta_status": "NOT_COMPUTABLE_ZERO_ID_POSITIVES",
+    "development_positives": 42,
+    "development_rows": 321222,
+    "excluded_pre_cutoff_rows": 2343,
+    "holdout_positives": 14,
+    "holdout_rows": 79542,
+    "indications": 23,
+    "primary_ci_lower": -0.009484827468089183,
+    "primary_ci_upper": 0.0013916328916157368,
+    "primary_comparator": "cheap_historical",
+    "primary_conclusion": "NOT_SUPPORTED",
+    "primary_delta": -0.00032755486429918244,
+    "primary_method": "geneformer_static_plus_cheap",
+    "primary_metric": "pooled_auprc",
+    "row_accounting_delta": 14
+  },
+  "warnings": [
+    "stage2b_row_accounting: Stage 2B reports at_risk_rows=400778, while development + holdout = 400764; delta=14. The sealed holdout row count is independently consistent downstream, so this is retained as a manifest-accounting warning rather than silently corrected."
+  ]
+}

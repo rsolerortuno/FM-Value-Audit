@@ -1,0 +1,60 @@
+{
+  "claim_scope": "RESPONSE_TRANSFER_PROXY_NOT_CLINICAL_TARGET_EVALUATION",
+  "key_artifacts": {
+    "CHANGELOG.md": {
+      "sha256": "c1ccfafd05994c5aa84dab15bf0decc66b9a24c35d43644f0d4dacdf062c2e24",
+      "size_bytes": 2007
+    },
+    "CRITICAL_EVALUATION.md": {
+      "sha256": "09cd226b52251f01d3d642672656d3fbe3a8a8f758a19227010b7736c848e750",
+      "size_bytes": 3136
+    },
+    "IMPLEMENTATION_REPORT.md": {
+      "sha256": "121e625e4f59c1900889a493490f63747ca4f9041539150335ea52c77f1d033a",
+      "size_bytes": 4930
+    },
+    "README.md": {
+      "sha256": "3ed61bcccbac9bd5f21b95a7286fc583843b1a87287321fbc29fe8cd8ce83243",
+      "size_bytes": 12556
+    },
+    "dist/fm_value_audit-0.3.0-py3-none-any.whl": {
+      "sha256": "67d9d038e3a01b7b6ad94ab534daaa919cea798a2a87b87d431171cbd49404c3",
+      "size_bytes": 59733
+    },
+    "results/ood_proxy/REPORT.md": {
+      "sha256": "6ed8dbba7111a077c12f80d4e3a0e253fa2e1113485facb195aeda6bdac4e1b1",
+      "size_bytes": 3155
+    },
+    "results/ood_proxy/effort_log.json": {
+      "sha256": "9270d5190b062c4813fe169320ad0b4d5cf8c3ced8456aad45aaadd50cfb391a",
+      "size_bytes": 259
+    },
+    "results/ood_proxy/nsclc_official_lesion_sample_mapping.csv": {
+      "sha256": "7a9f694bff30f4b55c530cc6f2869b8c3b25de730ee89592f6e2ad0d8bfff17e",
+      "size_bytes": 2154
+    },
+    "results/ood_proxy/ood_proxy_metrics.csv": {
+      "sha256": "0c57a1886969ad272554dfca1d4c4f078fd7cc2b60c24eb3c5fdc3bc326f4e3e",
+      "size_bytes": 1898
+    },
+    "results/ood_proxy/ood_proxy_paired_bootstrap_differences.csv": {
+      "sha256": "320c321df4ee7c1a2862994a92c2c019100227fb0903cb19fdd11130e92db1d7",
+      "size_bytes": 736
+    },
+    "results/ood_proxy/ood_proxy_summary.json": {
+      "sha256": "2e4e5c24d775e2bacc5bab58c299e837bb59a48f67b5f93552e23e874799a24a",
+      "size_bytes": 2330
+    },
+    "results/stage1_full_cells/stage1_full_audit.json": {
+      "sha256": "911ef61af06217dd7c17e8adb9058f30089b6b13ae5e6079233396b2d23a612e",
+      "size_bytes": 6375
+    },
+    "results/verification_v0.3.json": {
+      "sha256": "53627540bd56302fd36286029868fb7db36bc6d13902dc516439dbc479fbb263",
+      "size_bytes": 1196
+    }
+  },
+  "primary_clinical_target_metrics_status": "NOT_COMPUTED",
+  "release_date": "2026-07-30",
+  "version": "0.3.0"
+}
