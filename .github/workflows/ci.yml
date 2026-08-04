@@ -1,0 +1,177 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fmva-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Tests / Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install package and test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e '.[dev]'
+
+      - name: Compile source and tests
+        run: python -m compileall -q src tests
+
+      - name: Run test suite with branch coverage
+        run: |
+          mkdir -p ci-artifacts
+          pytest \
+            --cov=fmva \
+            --cov-branch \
+            --cov-report=term-missing \
+            --cov-report=json:ci-artifacts/coverage.json \
+            --cov-report=xml:ci-artifacts/coverage.xml \
+            --junitxml=ci-artifacts/pytest.xml \
+            --cov-fail-under=85 \
+            2>&1 | tee ci-artifacts/pytest.log
+
+      - name: Validate model registry
+        run: |
+          fmva validate-manifest registry/models.yaml \
+            2>&1 | tee ci-artifacts/model-registry.log
+
+      - name: Audit sealed temporal benchmark
+        run: |
+          fmva temporal-validate results/temporal_benchmark_v0.4 \
+            2>&1 | tee ci-artifacts/temporal-validation.log
+
+      - name: Exercise synthetic benchmark end to end
+        run: |
+          fmva simulate \
+            --output /tmp/fmva-synthetic.csv \
+            --genes 600 \
+            --seed 11
+          fmva benchmark \
+            --data /tmp/fmva-synthetic.csv \
+            --output /tmp/fmva-results \
+            --bootstrap 40 \
+            --seed 11
+          fmva report \
+            --results /tmp/fmva-results/benchmark_summary.json \
+            --output /tmp/fmva-report.md
+          python - <<'PYTHON'
+          import json
+          from pathlib import Path
+
+          summary = json.loads(
+              Path('/tmp/fmva-results/benchmark_summary.json').read_text(encoding='utf-8')
+          )
+          assert summary['synthetic_diagnostics']['harness_validation_passed']
+          PYTHON
+
+      - name: Write live validation summary
+        if: always()
+        run: |
+          python - <<'PYTHON'
+          import json
+          import re
+          from pathlib import Path
+
+          artifacts = Path('ci-artifacts')
+          coverage_path = artifacts / 'coverage.json'
+          pytest_path = artifacts / 'pytest.log'
+          coverage = json.loads(coverage_path.read_text()) if coverage_path.exists() else {}
+          pytest_text = pytest_path.read_text(errors='replace') if pytest_path.exists() else ''
+          match = re.search(r'(\d+) passed', pytest_text)
+          summary = {
+              'commit': '${{ github.sha }}',
+              'python': '${{ matrix.python-version }}',
+              'pytest_passed': int(match.group(1)) if match else None,
+              'branch_coverage_percent': coverage.get('totals', {}).get('percent_covered'),
+              'coverage_threshold_percent': 85,
+              'source': 'GitHub Actions live execution',
+          }
+          artifacts.mkdir(exist_ok=True)
+          (artifacts / 'validation-summary.json').write_text(
+              json.dumps(summary, indent=2) + '\n', encoding='utf-8'
+          )
+          with Path('${{ github.step_summary }}').open('a', encoding='utf-8') as handle:
+              handle.write('## FM Value Audit live validation\n\n')
+              handle.write(f"- Python: `{summary['python']}`\n")
+              handle.write(f"- Tests passed: `{summary['pytest_passed']}`\n")
+              handle.write(
+                  f"- Branch-aware coverage: `{summary['branch_coverage_percent']}`% "
+                  '(required: 85%)\n'
+              )
+          PYTHON
+
+      - name: Upload test and coverage evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-python-${{ matrix.python-version }}
+          path: ci-artifacts/
+          if-no-files-found: warn
+          retention-days: 30
+
+  quality:
+    name: Ruff quality gates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e '.[dev]'
+      - name: Ruff lint
+        run: ruff check .
+      - name: Ruff formatting
+        run: ruff format --check .
+      - name: Strict mypy
+        run: mypy --strict src tests
+
+  package:
+    name: Build and smoke-test distribution
+    runs-on: ubuntu-latest
+    needs: [tests, quality]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: python -m pip install --upgrade pip build
+      - name: Build wheel and source distribution
+        run: python -m build
+      - name: Smoke-test the built wheel in a clean environment
+        run: |
+          python -m venv /tmp/fmva-wheel-smoke
+          /tmp/fmva-wheel-smoke/bin/python -m pip install --upgrade pip
+          /tmp/fmva-wheel-smoke/bin/python -m pip install dist/*.whl
+          /tmp/fmva-wheel-smoke/bin/fmva --help
+          /tmp/fmva-wheel-smoke/bin/fmva temporal-validate \
+            results/temporal_benchmark_v0.4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: python-distributions
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 30
