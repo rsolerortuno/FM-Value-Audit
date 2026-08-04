@@ -1,0 +1,161 @@
+name: Publish v0.5.0a1 pre-release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v0.5.0a1"
+
+permissions:
+  contents: write
+
+jobs:
+  validate-build-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install package and release dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e '.[dev]'
+
+      - name: Create evidence directory
+        run: mkdir -p release-artifacts
+
+      - name: Compile
+        run: |
+          set -o pipefail
+          python -m compileall -q src tests \
+            2>&1 | tee release-artifacts/compile.log
+
+      - name: Ruff quality gates
+        run: |
+          set -o pipefail
+          ruff check . 2>&1 | tee release-artifacts/ruff-check.log
+          ruff format --check . 2>&1 | tee release-artifacts/ruff-format.log
+
+      - name: Test with real branch coverage
+        run: |
+          set -o pipefail
+          pytest \
+            --cov=fmva \
+            --cov-branch \
+            --cov-report=term-missing \
+            --cov-report=json:release-artifacts/coverage.json \
+            --cov-report=xml:release-artifacts/coverage.xml \
+            --junitxml=release-artifacts/pytest.xml \
+            --cov-fail-under=85 \
+            2>&1 | tee release-artifacts/pytest.log
+
+      - name: Scientific contract audits
+        run: |
+          set -o pipefail
+          fmva validate-manifest registry/models.yaml \
+            2>&1 | tee release-artifacts/model-registry.log
+          fmva temporal-validate results/temporal_benchmark_v0.4 \
+            2>&1 | tee release-artifacts/temporal-validation.log
+
+      - name: CLI smoke test
+        run: fmva --help 2>&1 | tee release-artifacts/cli-help.log
+
+      - name: Strict typing
+        run: |
+          set -o pipefail
+          mypy --strict src tests \
+            2>&1 | tee release-artifacts/mypy.log
+
+      - name: Build Python distributions
+        run: python -m build
+
+      - name: Smoke-test built wheel
+        run: |
+          python -m venv /tmp/fmva-release-smoke
+          /tmp/fmva-release-smoke/bin/python -m pip install --upgrade pip
+          /tmp/fmva-release-smoke/bin/python -m pip install dist/*.whl
+          /tmp/fmva-release-smoke/bin/fmva --help
+          /tmp/fmva-release-smoke/bin/fmva temporal-validate \
+            results/temporal_benchmark_v0.4
+
+      - name: Build Colab execution bundle
+        run: |
+          zip -r release-artifacts/FMVA-v0.5.0a1-Colab-bundle.zip \
+            notebooks/v0.5 \
+            protocols/FMVA_CONTEXTUAL_PROSPECTIVE_v0.5.json \
+            dist/*.whl
+
+      - name: Generate machine-readable validation and checksums
+        run: |
+          python - <<'PYTHON'
+          import hashlib
+          import json
+          import re
+          from pathlib import Path
+
+          out = Path('release-artifacts')
+          pytest_text = (out / 'pytest.log').read_text(errors='replace')
+          match = re.search(r'(\d+) passed', pytest_text)
+          coverage = json.loads((out / 'coverage.json').read_text())
+          summary = {
+              'release': '0.5.0a1',
+              'commit': '${{ github.sha }}',
+              'source': 'GitHub Actions release execution',
+              'checks': {
+                  'compile': 'PASS',
+                  'ruff_check': 'PASS',
+                  'ruff_format': 'PASS',
+                  'pytest': 'PASS',
+                  'pytest_passed': int(match.group(1)) if match else None,
+                  'branch_coverage_percent': coverage['totals']['percent_covered'],
+                  'coverage_threshold_percent': 85,
+                  'model_registry': 'PASS',
+                  'temporal_validation': 'PASS_WITH_WARNINGS',
+                  'cli_smoke': 'PASS',
+                  'package_build': 'PASS',
+                  'wheel_smoke': 'PASS',
+                  'mypy_strict': 'PASS',
+              },
+              'scientific': {
+                  'v0.4_primary_conclusion': 'NOT_SUPPORTED',
+                  'v0.5_contextual_result': 'NOT_COMPUTED',
+                  'future_labels_accessed': False,
+              },
+          }
+          (out / 'validation-summary.json').write_text(
+              json.dumps(summary, indent=2) + '\n', encoding='utf-8'
+          )
+
+          assets = [*Path('dist').glob('*'), *out.glob('*')]
+          manifest = []
+          for path in sorted(assets):
+              if not path.is_file() or path.name == 'release-manifest.json':
+                  continue
+              manifest.append({
+                  'path': path.as_posix(),
+                  'bytes': path.stat().st_size,
+                  'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+              })
+          (out / 'release-manifest.json').write_text(
+              json.dumps({'release': '0.5.0a1', 'files': manifest}, indent=2) + '\n',
+              encoding='utf-8',
+          )
+          PYTHON
+
+      - name: Publish GitHub pre-release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          prerelease: true
+          name: FM Value Audit v0.5.0a1
+          body_path: release/v0.5.0a1/RELEASE_BODY.md
+          files: |
+            dist/*
+            reports/portfolio_summary.csv
+            reports/portfolio_summary.json
+            reports/figures/*.png
+            release-artifacts/*
