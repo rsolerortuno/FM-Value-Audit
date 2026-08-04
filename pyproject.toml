@@ -1,0 +1,97 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fm-value-audit"
+version = "0.5.0a1"
+description = "Audit decision-relevant value of single-cell foundation models for target prioritisation."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+authors = [{name = "Rafael Soler Ortuño"}]
+keywords = ["single-cell", "foundation-models", "target-prioritisation", "benchmark", "leakage"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = [
+  "networkx>=3.2",
+  "numpy>=1.26,<2.3",
+  "openpyxl>=3.1",
+  "pandas>=2.1",
+  "pydantic>=2.7",
+  "pyyaml>=6.0",
+  "scikit-learn>=1.4",
+  "scipy>=1.11",
+  "typer>=0.12",
+]
+
+[project.optional-dependencies]
+models = [
+  "anndata>=0.10",
+  "h5py>=3.10",
+  "safetensors>=0.4",
+  "torch>=2.1",
+]
+dev = [
+  "build>=1.2",
+  "mypy>=1.11",
+  "pandas-stubs>=2.2",
+  "pytest>=8.2",
+  "pytest-cov>=5.0",
+  "ruff>=0.6",
+  "types-PyYAML>=6.0",
+]
+
+[project.scripts]
+fmva = "fmva.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_configs = true
+show_error_codes = true
+pretty = true
+
+[[tool.mypy.overrides]]
+module = ["sklearn.*", "networkx.*", "torch.*", "safetensors.*", "scipy.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers --strict-config"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["fmva"]
+omit = [
+  "src/fmva/cli.py",
+  "src/fmva/io.py",
+  "src/fmva/reporting.py",
+  "src/fmva/adapters/external.py",
+  "src/fmva/real_data.py",
+  "src/fmva/model_runtime.py",
+]
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
+skip_covered = true

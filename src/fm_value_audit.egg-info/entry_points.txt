@@ -1,0 +1,2 @@
+[console_scripts]
+fmva = fmva.cli:app

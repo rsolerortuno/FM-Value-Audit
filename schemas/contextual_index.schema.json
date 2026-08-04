@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cell_compartment": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "disease": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "gene_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "n_cells": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "n_samples": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "response_state": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "treatment_state": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "gene_id",
+    "disease",
+    "cell_compartment",
+    "treatment_state",
+    "response_state",
+    "n_cells",
+    "n_samples"
+  ],
+  "title": "FMVA contextual index row",
+  "type": "object"
+}

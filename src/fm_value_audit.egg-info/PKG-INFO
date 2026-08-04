@@ -1,3 +1,42 @@
+Metadata-Version: 2.4
+Name: fm-value-audit
+Version: 0.5.0a1
+Summary: Audit decision-relevant value of single-cell foundation models for target prioritisation.
+Author: Rafael Soler Ortuño
+License-Expression: Apache-2.0
+Keywords: single-cell,foundation-models,target-prioritisation,benchmark,leakage
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: networkx>=3.2
+Requires-Dist: numpy<2.3,>=1.26
+Requires-Dist: openpyxl>=3.1
+Requires-Dist: pandas>=2.1
+Requires-Dist: pydantic>=2.7
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: scikit-learn>=1.4
+Requires-Dist: scipy>=1.11
+Requires-Dist: typer>=0.12
+Provides-Extra: models
+Requires-Dist: anndata>=0.10; extra == "models"
+Requires-Dist: h5py>=3.10; extra == "models"
+Requires-Dist: safetensors>=0.4; extra == "models"
+Requires-Dist: torch>=2.1; extra == "models"
+Provides-Extra: dev
+Requires-Dist: build>=1.2; extra == "dev"
+Requires-Dist: mypy>=1.11; extra == "dev"
+Requires-Dist: pandas-stubs>=2.2; extra == "dev"
+Requires-Dist: pytest>=8.2; extra == "dev"
+Requires-Dist: pytest-cov>=5.0; extra == "dev"
+Requires-Dist: ruff>=0.6; extra == "dev"
+Requires-Dist: types-PyYAML>=6.0; extra == "dev"
+Dynamic: license-file
+
 **Live engineering controls:** [GitHub Actions CI](https://github.com/rsolerortuno/FM-Value-Audit/actions/workflows/ci.yml) · [CI definition](.github/workflows/ci.yml) · [Release validation](.github/workflows/release.yml) · [Apache-2.0 license](LICENSE)
 
 The project does not use manually authored test or coverage images as evidence. Current engineering status comes from executable GitHub Actions jobs and their uploaded JUnit, coverage, audit and package artifacts.

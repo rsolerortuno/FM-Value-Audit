@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using this metadata."
+title: "FM Value Audit"
+version: 0.5.0a1
+date-released: 2026-08-04
+authors:
+  - family-names: "Soler Ortuño"
+    given-names: "Rafael"
+    orcid: "https://orcid.org/0000-0003-1245-5734"
+license: Apache-2.0
+abstract: >-
+  A leakage-audited benchmark framework for measuring whether single-cell foundation-model
+  representations add decision-relevant value over cheap baselines in immuno-oncology target
+  prioritisation.
+keywords:
+  - single-cell
+  - foundation models
+  - target prioritisation
+  - temporal validation
+  - Geneformer
+  - scGPT
+  - leakage audit
+  - immuno-oncology

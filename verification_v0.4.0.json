@@ -1,0 +1,125 @@
+{
+  "artifacts": {
+    "source_zip": {
+      "checks": [
+        "zip_crc",
+        "release_file_manifest",
+        "forbidden_artifact_scan",
+        "ruff",
+        "mypy_strict",
+        "compileall",
+        "pytest_43",
+        "coverage_88.29",
+        "registry_6",
+        "temporal_cli",
+        "installed_wheel_smoke"
+      ],
+      "file_count": 153,
+      "manifest_entries": 152,
+      "root": "fm-value-audit-v0.4.0",
+      "sha256_location": "external release manifest and .sha256 sidecar",
+      "status": "PASS_CLEAN_EXTRACTION"
+    },
+    "wheel": {
+      "bytes": 66966,
+      "path": "dist/fm_value_audit-0.4.0-py3-none-any.whl",
+      "sha256": "9a2de5489ca690bedd447fd2e948c40a3fa4a90f66a9e6fd8c8e74fa52aebfe5",
+      "status": "PASS"
+    }
+  },
+  "engineering": {
+    "compileall": {
+      "scope": "src tests",
+      "status": "PASS"
+    },
+    "coverage": {
+      "branch_aware_percent": 88.29,
+      "status": "PASS",
+      "threshold_percent": 85.0
+    },
+    "github_actions": {
+      "python_versions": [
+        "3.11",
+        "3.12",
+        "3.13"
+      ],
+      "status": "NOT_RUN_NO_REMOTE_PUSH"
+    },
+    "model_registry": {
+      "entries": 6,
+      "status": "PASS"
+    },
+    "mypy_strict": {
+      "scope": "src tests",
+      "source_files": 36,
+      "status": "PASS",
+      "version": "2.3.0"
+    },
+    "pytest": {
+      "status": "PASS",
+      "tests": 43
+    },
+    "ruff_check": {
+      "status": "PASS",
+      "version": "0.16.0"
+    },
+    "ruff_format": {
+      "status": "PASS",
+      "version": "0.16.0"
+    },
+    "wheel_smoke": {
+      "help": "PASS",
+      "status": "PASS",
+      "temporal_cli": "PASS_WITH_WARNINGS",
+      "version": "0.4.0"
+    }
+  },
+  "release": "0.4.0",
+  "runtime": {
+    "platform": "Linux x86_64",
+    "python": "3.13.5"
+  },
+  "schema_version": "1.0",
+  "scientific_conclusion": {
+    "ci95": [
+      -0.009484827468089183,
+      0.0013916328916157368
+    ],
+    "comparator": "cheap_historical",
+    "conclusion": "NOT_SUPPORTED",
+    "delta": -0.00032755486429918244,
+    "metric": "pooled_auprc",
+    "primary_method": "geneformer_static_plus_cheap"
+  },
+  "temporal_benchmark": {
+    "invariants": {
+      "PASS": 26,
+      "WARNING": 1
+    },
+    "status": "PASS_WITH_WARNINGS",
+    "summary": {
+      "best_final_auprc": 0.0025130283634364,
+      "best_final_auprc_method": "scgpt_static_plus_cheap",
+      "candidate_genes": 17527,
+      "clinical_ood_delta_status": "NOT_COMPUTABLE_ZERO_ID_POSITIVES",
+      "development_positives": 42,
+      "development_rows": 321222,
+      "excluded_pre_cutoff_rows": 2343,
+      "holdout_positives": 14,
+      "holdout_rows": 79542,
+      "indications": 23,
+      "primary_ci_lower": -0.009484827468089183,
+      "primary_ci_upper": 0.0013916328916157368,
+      "primary_comparator": "cheap_historical",
+      "primary_conclusion": "NOT_SUPPORTED",
+      "primary_delta": -0.00032755486429918244,
+      "primary_method": "geneformer_static_plus_cheap",
+      "primary_metric": "pooled_auprc",
+      "row_accounting_delta": 14
+    },
+    "warnings": [
+      "stage2b_row_accounting: Stage 2B reports at_risk_rows=400778, while development + holdout = 400764; delta=14. The sealed holdout row count is independently consistent downstream, so this is retained as a manifest-accounting warning rather than silently corrected."
+    ]
+  },
+  "validated_on": "2026-08-04"
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fm-value-audit model registry",
+  "type": "object",
+  "required": ["schema_version", "models"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "model_id",
+          "family",
+          "checkpoint_identifier",
+          "version",
+          "licence",
+          "documented_pretraining_corpora",
+          "parameter_count",
+          "leakage_status",
+          "availability",
+          "enabled_by_default"
+        ],
+        "properties": {
+          "model_id": {"type": "string", "minLength": 1},
+          "family": {"type": "string", "minLength": 1},
+          "checkpoint_identifier": {"type": "string", "minLength": 1},
+          "version": {"type": "string", "minLength": 1},
+          "licence": {"type": "string", "minLength": 1},
+          "documented_pretraining_corpora": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "parameter_count": {"type": ["integer", "null"], "minimum": 1},
+          "leakage_status": {
+            "enum": ["RESOLVED_CLEAN", "RESOLVED_OVERLAP", "UNRESOLVED"]
+          },
+          "availability": {"enum": ["EXECUTED", "EXECUTED_SUBSET", "LOCAL_ONLY", "MOCK_ONLY", "NOT_COMPUTED"]},
+          "enabled_by_default": {"type": "boolean"},
+          "notes": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
