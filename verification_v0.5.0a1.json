@@ -1,0 +1,96 @@
+{
+  "engineering": {
+    "compileall": {
+      "scope": "src tests",
+      "status": "PASS"
+    },
+    "coverage": {
+      "branch_aware_percent": 86.78,
+      "status": "PASS",
+      "threshold_percent": 85.0
+    },
+    "github_actions": {
+      "status": "NOT_RUN_NO_REMOTE_PUSH"
+    },
+    "mypy_strict": {
+      "blocks": "beta_promotion",
+      "reason": "NumPy generic-signature migration and inherited return annotations remain",
+      "status": "NOT_PASS_ALPHA_DEBT"
+    },
+    "notebooks": {
+      "count": 3,
+      "status": "PASS",
+      "stored_outputs": 0
+    },
+    "pytest": {
+      "status": "PASS",
+      "tests": 70
+    },
+    "ruff_check": {
+      "status": "PASS",
+      "version": "0.16.0"
+    },
+    "ruff_format": {
+      "status": "PASS",
+      "version": "0.16.0"
+    },
+    "wheel_smoke": {
+      "cli_help": "PASS",
+      "protocol_init": "PASS",
+      "status": "PASS",
+      "version": "0.5.0a1"
+    }
+  },
+  "execution": {
+    "geneformer": {
+      "notebook": "FMVA_v05_01_geneformer_contextual.ipynb",
+      "status": "NOT_RUN_REQUIRES_COLAB_GPU"
+    },
+    "preflight": {
+      "notebook": "FMVA_v05_00_preflight_protocol.ipynb",
+      "status": "NOT_RUN_REQUIRES_COLAB_CPU"
+    },
+    "scgpt": {
+      "notebook": "FMVA_v05_02_scgpt_contextual.ipynb",
+      "status": "NOT_RUN_REQUIRES_COLAB_GPU"
+    }
+  },
+  "release": "0.5.0a1",
+  "runtime": {
+    "platform": "Linux x86_64",
+    "python": "3.13.5"
+  },
+  "schema_version": "1.0",
+  "scientific_protocol": {
+    "contextual_efficacy_claim": "NOT_COMPUTED",
+    "first_eligible_snapshot": "2027-02-04",
+    "future_labels_accessed": false,
+    "information_cutoff": "2026-08-04",
+    "maximum_snapshot_date": "2028-08-04",
+    "metric": "AUPRC",
+    "outcome_window_start": "2026-08-05",
+    "primary_method": "geneformer_contextual_plus_cheap",
+    "protocol_id": "fmva-contextual-prospective-2026-08-04",
+    "reference": "cheap_historical"
+  },
+  "status": "ALPHA_READY_FOR_COLAB_EXECUTION",
+  "validated_on": "2026-08-04",
+  "portfolio_release": {
+    "readme_language": "English",
+    "figures": 4,
+    "figure_sources": "versioned_repository_results",
+    "portfolio_summary_csv": "reports/portfolio_summary.csv",
+    "portfolio_summary_json": "reports/portfolio_summary.json",
+    "model_card": "reports/model_card.md",
+    "github_release_workflow": ".github/workflows/release.yml",
+    "release_classification": "PRERELEASE",
+    "scientific_claims_changed": false,
+    "wheel_sha256": "fd6bb184137f690a8d8e18aa46e850e06af74cad38e2663107931d5c87c6d6c4",
+    "sdist_sha256": "563e5878fbcfc0db090f63c2b897c70e93a0f6951e25c3e6b5709f205bc30288",
+    "readme_claim_markers": "PASS",
+    "readme_relative_links": "PASS",
+    "release_workflow_yaml": "PASS",
+    "tests_after_readme_rewrite": 70,
+    "branch_coverage_percent": 86.78
+  }
+}
