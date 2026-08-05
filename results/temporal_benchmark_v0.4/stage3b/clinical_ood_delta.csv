@@ -1,0 +1,8 @@
+method,id_melanoma_auprc,ood_non_melanoma_auprc,clinical_ood_delta
+cheap_historical,,0.002379186544852084,
+geneformer_random_plus_cheap,,0.0018402318672375746,
+geneformer_static_plus_cheap,,0.002035266444676792,
+manual_expression_plus_cheap,,0.002124318928737238,
+popularity_only,,0.0005943101672746217,
+scgpt_random_plus_cheap,,0.0022053123050689407,
+scgpt_static_plus_cheap,,0.0026122893944001604,

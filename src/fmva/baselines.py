@@ -62,7 +62,9 @@ def _percentile_rank(values: npt.NDArray[Any]) -> npt.NDArray[Any]:
     return ranks / denominator
 
 
-def _transform(values: npt.NDArray[Any], training_indices: npt.NDArray[Any], configuration: str) -> npt.NDArray[Any]:
+def _transform(
+    values: npt.NDArray[Any], training_indices: npt.NDArray[Any], configuration: str
+) -> npt.NDArray[Any]:
     if configuration == "identity":
         return values.astype(float, copy=True)
     if configuration == "percentile_rank":
@@ -368,7 +370,9 @@ def run_random_mlp_ood_transfer(
         configurations=configurations,
     )
 
-    def embeddings_for(candidate_seed: int) -> tuple[npt.NDArray[Any], npt.NDArray[Any], RandomMLPAdapter]:
+    def embeddings_for(
+        candidate_seed: int,
+    ) -> tuple[npt.NDArray[Any], npt.NDArray[Any], RandomMLPAdapter]:
         adapter = RandomMLPAdapter(
             model_id="random_mlp_small_ood_transfer",
             seed=candidate_seed,

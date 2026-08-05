@@ -1,0 +1,119 @@
+{
+  "alpha_grid": [
+    1e-06,
+    1e-05,
+    0.0001,
+    0.001
+  ],
+  "bootstrap": {
+    "paired_across_methods": true,
+    "replicates": 2000,
+    "seed": 10729,
+    "unit": "target_gene"
+  },
+  "calibration_metrics": [
+    "brier_score",
+    "log_loss",
+    "ece10"
+  ],
+  "claim_limits": [
+    "Static token embeddings are not contextual cell representations.",
+    "Development metrics are tuning diagnostics, not final evidence.",
+    "Holdout labels were not loaded in Stage 3A.",
+    "Final claims require the one-time Stage 3B holdout evaluation."
+  ],
+  "clinical_ood_definition": "OOD = all non-melanoma indications; ID = melanoma. Report separately and do not use for tuning.",
+  "development_primary_delta": 0.00017070635705183825,
+  "fixed_gene_folds": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "frozen_at_utc": "2026-08-04T09:47:52.733959+00:00",
+  "holdout_gene_fold": 0,
+  "input_hashes": {
+    "development_sha256": "bf67d7fa39d711bbafa3e944575ae1ebbeb5a7e777e1e2de87f413cf1d0e7646",
+    "geneformer_model_sha256": "a5e33a757431643b3697de7ef6127950cdc49e06e58d4266b3a3ab191b683f14",
+    "geneformer_symbol_map_sha256": "55e67962e79c0039a6c32d43c5c99f38e51964bbcfa32f736150ee1e285c438c",
+    "geneformer_token_dictionary_sha256": "ab9dc40973fa5224d77b793e2fd114cacf3d08423ed9c4c49caf0ba9c7f218f1",
+    "holdout_predictors_sha256": "2182b1b1aa58da585cd84931ac25e699f52520950d472a492af936513af60550",
+    "holdout_seal_sha256": "2cf95352f6983904a86f63a0e4d38791bb126e844ac9fcf406dcacf6f027b2cb",
+    "scgpt_model_sha256": "6cb5d451ab5c4b33eb673adbe4fddc61d2389df1b89b7651a9fe2e557572b922",
+    "scgpt_vocab_sha256": "acca93d114ca62c3f0f50debbd23e8c87f0714f4737764454f6b2b13f2e8580f"
+  },
+  "methods": {
+    "cheap_historical": {
+      "alpha": 1e-05,
+      "feature_count": 38,
+      "head": "SGDClassifier_log_loss_l2_balanced_average",
+      "platt_calibration": "crossfitted_gene_fold_then_refit_all_development"
+    },
+    "geneformer_random_plus_cheap": {
+      "alpha": 0.0001,
+      "feature_count": 71,
+      "head": "SGDClassifier_log_loss_l2_balanced_average",
+      "platt_calibration": "crossfitted_gene_fold_then_refit_all_development"
+    },
+    "geneformer_static_plus_cheap": {
+      "alpha": 1e-05,
+      "feature_count": 71,
+      "head": "SGDClassifier_log_loss_l2_balanced_average",
+      "platt_calibration": "crossfitted_gene_fold_then_refit_all_development"
+    },
+    "manual_expression_plus_cheap": {
+      "alpha": 1e-05,
+      "feature_count": 47,
+      "head": "SGDClassifier_log_loss_l2_balanced_average",
+      "platt_calibration": "crossfitted_gene_fold_then_refit_all_development"
+    },
+    "popularity_only": {
+      "alpha": 1e-06,
+      "feature_count": 24,
+      "head": "SGDClassifier_log_loss_l2_balanced_average",
+      "platt_calibration": "crossfitted_gene_fold_then_refit_all_development"
+    },
+    "scgpt_random_plus_cheap": {
+      "alpha": 1e-05,
+      "feature_count": 71,
+      "head": "SGDClassifier_log_loss_l2_balanced_average",
+      "platt_calibration": "crossfitted_gene_fold_then_refit_all_development"
+    },
+    "scgpt_static_plus_cheap": {
+      "alpha": 1e-06,
+      "feature_count": 71,
+      "head": "SGDClassifier_log_loss_l2_balanced_average",
+      "platt_calibration": "crossfitted_gene_fold_then_refit_all_development"
+    }
+  },
+  "output_hashes": {
+    "development_metrics_sha256": "2806d4125e91b270346293fee06c081de8be18108c196420c4f1e476d2140553",
+    "development_oof_predictions_sha256": "7b16e3405efdb67a5b74de3f760e1688297eff947149ffb42bac17bd8876815b",
+    "development_tuning_effort_sha256": "83ce15b0f48b0c75241a2581f7289049cc5aebc4a5f2d48de3af8373e72fd3cd",
+    "holdout_method_scores_sha256": "6669eeaaca49178fd580408991d721e64fc8d72c717c6c0ba58afa826e3f2645",
+    "static_representations_sha256": "4038930c7aa26140d981ca381b67bc67d81de34a2c06170779ab29b88a36f9f2"
+  },
+  "pca_components": 32,
+  "pca_fit_scope": "development_genes_only",
+  "primary_comparator": "cheap_historical",
+  "primary_contrast": "AUPRC(geneformer_static_plus_cheap) - AUPRC(cheap_historical)",
+  "primary_method": "geneformer_static_plus_cheap",
+  "primary_metric": "pooled_auprc",
+  "ranking_metrics": [
+    "pooled_auprc",
+    "mrr_macro_indication",
+    "recall_at_10_macro_indication",
+    "recall_at_50_macro_indication",
+    "recall_at_100_macro_indication",
+    "excess_over_popularity"
+  ],
+  "secondary_methods": [
+    "popularity_only",
+    "manual_expression_plus_cheap",
+    "scgpt_static_plus_cheap",
+    "geneformer_random_plus_cheap",
+    "scgpt_random_plus_cheap"
+  ],
+  "seed": 1729,
+  "status": "FROZEN_BEFORE_HOLDOUT_LABEL_ACCESS"
+}

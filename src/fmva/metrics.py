@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from collections.abc import Callable
+from typing import Any
 
 import numpy as np
 import numpy.typing as npt
-from typing import Any
 from sklearn.metrics import average_precision_score
 
 from fmva.schemas import MetricInterval
@@ -89,7 +89,9 @@ def expected_calibration_error(
     return float(error)
 
 
-def metric_bundle(y_true: npt.NDArray[Any], scores: npt.NDArray[Any], k: int = 20) -> dict[str, float]:
+def metric_bundle(
+    y_true: npt.NDArray[Any], scores: npt.NDArray[Any], k: int = 20
+) -> dict[str, float]:
     """Compute all raw ranking metrics."""
     return {
         f"precision_at_{k}": precision_at_k(y_true, scores, k),

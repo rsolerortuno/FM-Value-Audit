@@ -1,0 +1,69 @@
+{
+  "at_risk_rows": 400778,
+  "clinical_scope": "PRESPECIFIED_SOLID_TUMOUR_PANEL",
+  "completed_at_utc": "2026-08-04T09:08:44.991767+00:00",
+  "development_positives": 42,
+  "development_rows": 321222,
+  "excluded_pre_cutoff_rows": 2343,
+  "historical_feature_release": "Open Targets 23.06",
+  "holdout_positives": 14,
+  "holdout_rows": 79542,
+  "label_scope": "STRICT_SINGLE_DIRECT_HUMAN_TARGET",
+  "outputs": [
+    {
+      "bytes": 1054090,
+      "path": "temporal_benchmark/01_clinical_outcomes/wide_solid_tumors/drug_target_mapping/precutoff_intervention_target_mapping_wide.parquet",
+      "sha256": "ab9d92e6d07c509cafddae6162dca6ff0aaacff83dc756d6e26ae311ce12ac94"
+    },
+    {
+      "bytes": 8964,
+      "path": "temporal_benchmark/01_clinical_outcomes/wide_solid_tumors/stage2a_positive_precedence_overrides.parquet",
+      "sha256": "9edb44351197416750b6c64e2ad2060f835c0578e909f310db19535947f20e5b"
+    },
+    {
+      "bytes": 57631,
+      "path": "temporal_benchmark/01_clinical_outcomes/wide_solid_tumors/precutoff_target_indication_entries_wide.parquet",
+      "sha256": "d0cbb26396920b268bcc6d0801729bd4272c9659104f2048ae3a5d67298d6d83"
+    },
+    {
+      "bytes": 420,
+      "path": "temporal_benchmark/01_clinical_outcomes/wide_solid_tumors/PRE_CUTOFF_MAPPING_COVERAGE.json",
+      "sha256": "7ff9e2b93a790f5f182bbdfb1aeaae2c072d2ef71a9a5aa2c63cd80f23c98554"
+    },
+    {
+      "bytes": 279634,
+      "path": "temporal_benchmark/06_locked_holdout/wide_solid_tumors/sealed_inputs/development_labels_features.parquet",
+      "sha256": "bf67d7fa39d711bbafa3e944575ae1ebbeb5a7e777e1e2de87f413cf1d0e7646"
+    },
+    {
+      "bytes": 83908,
+      "path": "temporal_benchmark/06_locked_holdout/wide_solid_tumors/sealed_inputs/holdout_candidate_predictors.parquet",
+      "sha256": "2182b1b1aa58da585cd84931ac25e699f52520950d472a492af936513af60550"
+    },
+    {
+      "bytes": 249393,
+      "path": "temporal_benchmark/06_locked_holdout/wide_solid_tumors/sealed_inputs/holdout_candidate_ids.csv.gz",
+      "sha256": "d23330315ea05446223bf661eef739c67f3068095591c6f17cedcde2bd1be0f9"
+    },
+    {
+      "bytes": 41777,
+      "path": "temporal_benchmark/06_locked_holdout/wide_solid_tumors/evaluation_only/holdout_labels.parquet",
+      "sha256": "f0fdf95c80ecf544346d12397dbbfc9145e16d6704dd6848c69c1c647623c428"
+    },
+    {
+      "bytes": 964,
+      "path": "temporal_benchmark/06_locked_holdout/wide_solid_tumors/sealed_inputs/holdout_seal.json",
+      "sha256": "2cf95352f6983904a86f63a0e4d38791bb126e844ac9fcf406dcacf6f027b2cb"
+    },
+    {
+      "bytes": 722,
+      "path": "temporal_benchmark/06_locked_holdout/wide_solid_tumors/sealed_inputs/configuration_freeze_template.json",
+      "sha256": "ee808840ce56d8989e9b184964ae142cd054b107a3928f8867e06b3ff2aafc1f"
+    }
+  ],
+  "precedence_definition": "High-confidence single direct human target mapping of a therapeutic Phase I+ intervention first posted on or before cutoff.",
+  "publication_cutoff": "2023-08-09",
+  "split_design": "GENE_DISJOINT_FIXED_TEMPORAL_HOLDOUT",
+  "stage": "2B-WIDE",
+  "status": "COMPLETE"
+}

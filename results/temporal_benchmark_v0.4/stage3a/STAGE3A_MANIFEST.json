@@ -1,0 +1,26 @@
+{
+  "configuration_freeze_sha256": "879fbd5f585856c38554541f4b6e018ac011a166953f912a93014df650062c24",
+  "development_positives": 42,
+  "development_rows": 321222,
+  "holdout_labels_loaded": false,
+  "holdout_rows_scored_blind": 79542,
+  "methods": [
+    "popularity_only",
+    "cheap_historical",
+    "manual_expression_plus_cheap",
+    "geneformer_static_plus_cheap",
+    "scgpt_static_plus_cheap",
+    "geneformer_random_plus_cheap",
+    "scgpt_random_plus_cheap"
+  ],
+  "outputs": {
+    "configuration_freeze": "temporal_benchmark/06_locked_holdout/wide_solid_tumors/sealed_inputs/configuration_freeze.json",
+    "holdout_scores": "temporal_benchmark/06_locked_holdout/wide_solid_tumors/sealed_inputs/holdout_method_scores_frozen.parquet",
+    "metrics": "temporal_benchmark/07_results/wide_solid_tumors/development/development_metrics.csv",
+    "oof_predictions": "temporal_benchmark/07_results/wide_solid_tumors/development/development_oof_predictions.parquet"
+  },
+  "primary_comparator": "cheap_historical",
+  "primary_method": "geneformer_static_plus_cheap",
+  "stage": "3A",
+  "status": "COMPLETE_CONFIGURATION_FROZEN"
+}

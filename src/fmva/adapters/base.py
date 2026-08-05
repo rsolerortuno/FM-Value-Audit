@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from typing import Any, Protocol
 
-import numpy as np
 import numpy.typing as npt
 import pandas as pd
 

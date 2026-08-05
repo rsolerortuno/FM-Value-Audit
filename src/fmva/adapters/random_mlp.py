@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Any
 
 import numpy as np
 import numpy.typing as npt
-from typing import Any
 import pandas as pd
 
 
@@ -28,7 +28,9 @@ class RandomMLPAdapter:
             + self.embedding_width
         )
 
-    def _weights(self, input_width: int) -> tuple[npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any]]:
+    def _weights(
+        self, input_width: int
+    ) -> tuple[npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any]]:
         rng = np.random.default_rng(self.seed)
         first = rng.normal(
             0.0,

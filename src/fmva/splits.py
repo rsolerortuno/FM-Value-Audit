@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Any
 
 import numpy as np
 import numpy.typing as npt
-from typing import Any
 import pandas as pd
 from sklearn.model_selection import train_test_split
 

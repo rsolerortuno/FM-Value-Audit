@@ -1,0 +1,10 @@
+{
+  "ci_lower_2_5": -0.009484827468089183,
+  "ci_upper_97_5": 0.0013916328916157368,
+  "conclusion": "NOT_SUPPORTED",
+  "interpretation_limit": "Geneformer and scGPT features are static token geometry, not contextual cell embeddings.",
+  "metric": "pooled_auprc",
+  "point_delta": -0.00032755486429918244,
+  "primary_comparator": "cheap_historical",
+  "primary_method": "geneformer_static_plus_cheap"
+}

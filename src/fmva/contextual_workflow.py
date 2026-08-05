@@ -216,7 +216,9 @@ class TokenGeneAccumulator:
             np.add.at(self.token_count, genes, 1)
             np.add.at(self.cell_count, np.unique(genes), 1)
 
-    def finalise(self) -> tuple[npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any]]:
+    def finalise(
+        self,
+    ) -> tuple[npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any]]:
         genes = np.flatnonzero(self.token_count > 0)
         denominator = self.token_count[genes, None]
         pretrained = (self.pretrained_sum[genes] / denominator).astype(np.float32)

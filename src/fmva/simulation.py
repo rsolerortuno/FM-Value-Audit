@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 import math
+from typing import Any
 
 import numpy as np
 import numpy.typing as npt
-from typing import Any
 import pandas as pd
 
 REQUIRED_SYNTHETIC_COLUMNS = {

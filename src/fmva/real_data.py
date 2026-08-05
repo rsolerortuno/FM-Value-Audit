@@ -229,7 +229,9 @@ def _group_matrix(labels: Sequence[str]) -> tuple[list[str], npt.NDArray[Any]]:
     return categories, matrix
 
 
-def _safe_log2_ratio(numerator: npt.NDArray[Any], denominator: npt.NDArray[Any]) -> npt.NDArray[Any]:
+def _safe_log2_ratio(
+    numerator: npt.NDArray[Any], denominator: npt.NDArray[Any]
+) -> npt.NDArray[Any]:
     result = np.log2(numerator + 1.0) - np.log2(denominator + 1.0)
     return np.asarray(result, dtype=np.float64)
 

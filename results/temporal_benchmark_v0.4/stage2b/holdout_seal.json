@@ -1,0 +1,21 @@
+{
+  "at_risk_rows": 400778,
+  "cutoff_date": "2023-08-09",
+  "development_end": "2024-12-31",
+  "development_positives": 42,
+  "development_rows": 321222,
+  "development_sha256": "bf67d7fa39d711bbafa3e944575ae1ebbeb5a7e777e1e2de87f413cf1d0e7646",
+  "excluded_pre_cutoff_rows": 2343,
+  "gene_disjoint": true,
+  "gene_fold_count": 5,
+  "holdout_gene_fold": 0,
+  "holdout_ids_sha256": "d23330315ea05446223bf661eef739c67f3068095591c6f17cedcde2bd1be0f9",
+  "holdout_labels_sha256": "f0fdf95c80ecf544346d12397dbbfc9145e16d6704dd6848c69c1c647623c428",
+  "holdout_positives": 14,
+  "holdout_predictors_sha256": "2182b1b1aa58da585cd84931ac25e699f52520950d472a492af936513af60550",
+  "holdout_rows": 79542,
+  "holdout_start": "2025-01-01",
+  "rule": "Fold assignments were created in Stage 2A-WIDE before model fitting. Pre-cutoff high-confidence clinical entries are removed.",
+  "snapshot_end": "2026-08-03",
+  "status": "SEALED_PROCEDURALLY_NOT_CRYPTOGRAPHICALLY_BLIND"
+}
