@@ -1,3 +1,10 @@
+[![CI](https://github.com/rsolerortuno/FM-Value-Audit/actions/workflows/ci.yml/badge.svg)](https://github.com/rsolerortuno/FM-Value-Audit/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/badge/release-v0.5.0a1-blue.svg)](RELEASE_NOTES_v0.5.0a1.md)
+[![Tests](https://img.shields.io/badge/tests-70%20passed-brightgreen.svg)](VALIDATION_v0.5.0a1.md)
+[![Coverage](https://img.shields.io/badge/coverage-86.9%25-brightgreen.svg)](VALIDATION_v0.5.0a1.md)
+[![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/license-Apache--2.0-yellow.svg)](LICENSE)
+
 **Live engineering controls:** [GitHub Actions CI](https://github.com/rsolerortuno/FM-Value-Audit/actions/workflows/ci.yml) · [CI definition](.github/workflows/ci.yml) · [Release validation](.github/workflows/release.yml) · [Apache-2.0 license](LICENSE)
 
 The project does not use manually authored test or coverage images as evidence. Current engineering status comes from executable GitHub Actions jobs and their uploaded JUnit, coverage, audit and package artifacts.
