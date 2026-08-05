@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Final
+from typing import Any, Final
 
 import numpy as np
+import numpy.typing as npt
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import average_precision_score
@@ -31,8 +32,8 @@ SCALAR_METHOD_COLUMNS: Final[dict[str, str]] = {
 class ScoreOutput:
     """Scores, optional probabilities, effort and method metadata."""
 
-    scores: np.ndarray
-    probabilities: np.ndarray | None
+    scores: npt.NDArray[Any]
+    probabilities: npt.NDArray[Any] | None
     effort: EffortRecord
     metadata: dict[str, object]
 
@@ -53,7 +54,7 @@ def canonical_feature_columns(context: str, include_popularity: bool = True) -> 
     return columns
 
 
-def _percentile_rank(values: np.ndarray) -> np.ndarray:
+def _percentile_rank(values: npt.NDArray[Any]) -> npt.NDArray[Any]:
     order = np.argsort(values, kind="mergesort")
     ranks = np.empty(len(values), dtype=float)
     ranks[order] = np.arange(len(values), dtype=float)
@@ -61,7 +62,7 @@ def _percentile_rank(values: np.ndarray) -> np.ndarray:
     return ranks / denominator
 
 
-def _transform(values: np.ndarray, training_indices: np.ndarray, configuration: str) -> np.ndarray:
+def _transform(values: npt.NDArray[Any], training_indices: npt.NDArray[Any], configuration: str) -> npt.NDArray[Any]:
     if configuration == "identity":
         return values.astype(float, copy=True)
     if configuration == "percentile_rank":
@@ -96,7 +97,7 @@ def run_scalar_baseline(
     configurations = ["identity", "percentile_rank", "robust_z"]
     tracker = EffortTracker(method=method, seed=seed, configurations=configurations)
 
-    def tune() -> tuple[str, np.ndarray, float]:
+    def tune() -> tuple[str, npt.NDArray[Any], float]:
         best_configuration = configurations[0]
         best_scores = _transform(values, split.historical_train, best_configuration)
         validation_y = split.historical_labels[split.historical_validation]
@@ -117,7 +118,7 @@ def run_scalar_baseline(
     selected, tuned_scores, validation_auprc = tracker.run_tuning(tune)
     tracker.selected_configuration = selected
 
-    def final() -> np.ndarray:
+    def final() -> npt.NDArray[Any]:
         return _transform(values, np.arange(len(frame), dtype=int), selected)
 
     final_scores = tracker.run_final(final)
@@ -194,7 +195,7 @@ def run_supervised_baseline(
     selected_c, validation_auprc = tracker.run_tuning(tune)
     tracker.selected_configuration = f"C={selected_c:g}"
 
-    def final() -> tuple[np.ndarray, np.ndarray]:
+    def final() -> tuple[npt.NDArray[Any], npt.NDArray[Any]]:
         model = _make_logistic(selected_c, seed)
         model.fit(matrix, split.historical_labels)
         probabilities = model.predict_proba(matrix)[:, 1]
@@ -234,7 +235,7 @@ def run_random_mlp(
     configurations = [f"seed={candidate}" for candidate in candidate_seeds]
     tracker = EffortTracker(method=method, seed=seed, configurations=configurations)
 
-    def embed_for(candidate_seed: int) -> np.ndarray:
+    def embed_for(candidate_seed: int) -> npt.NDArray[Any]:
         adapter = RandomMLPAdapter(
             model_id=method,
             seed=candidate_seed,
@@ -264,7 +265,7 @@ def run_random_mlp(
     selected_seed, validation_auprc = tracker.run_tuning(tune)
     tracker.selected_configuration = f"seed={selected_seed}"
 
-    def final() -> tuple[np.ndarray, int]:
+    def final() -> tuple[npt.NDArray[Any], int]:
         embeddings = embed_for(selected_seed)
         model = _make_logistic(1.0, seed)
         model.fit(embeddings, split.historical_labels)
@@ -330,7 +331,7 @@ def run_supervised_ood_transfer(
     selected_c, validation_auprc = tracker.run_tuning(tune)
     tracker.selected_configuration = f"C={selected_c:g}"
 
-    def final() -> np.ndarray:
+    def final() -> npt.NDArray[Any]:
         model = _make_logistic(selected_c, seed)
         model.fit(id_matrix, split.historical_labels)
         return np.asarray(model.predict_proba(ood_matrix)[:, 1], dtype=np.float64)
@@ -367,7 +368,7 @@ def run_random_mlp_ood_transfer(
         configurations=configurations,
     )
 
-    def embeddings_for(candidate_seed: int) -> tuple[np.ndarray, np.ndarray, RandomMLPAdapter]:
+    def embeddings_for(candidate_seed: int) -> tuple[npt.NDArray[Any], npt.NDArray[Any], RandomMLPAdapter]:
         adapter = RandomMLPAdapter(
             model_id="random_mlp_small_ood_transfer",
             seed=candidate_seed,
@@ -402,7 +403,7 @@ def run_random_mlp_ood_transfer(
     selected_seed, validation_auprc = tracker.run_tuning(tune)
     tracker.selected_configuration = f"seed={selected_seed}"
 
-    def final() -> tuple[np.ndarray, int]:
+    def final() -> tuple[npt.NDArray[Any], int]:
         id_embeddings, ood_embeddings, adapter = embeddings_for(selected_seed)
         model = _make_logistic(1.0, seed)
         model.fit(id_embeddings, split.historical_labels)
@@ -432,7 +433,7 @@ def run_random_ranking(frame: pd.DataFrame, split: TemporalSplit, seed: int) -> 
     configurations = [f"seed={candidate}" for candidate in candidate_seeds]
     tracker = EffortTracker(method="random_ranking", seed=seed, configurations=configurations)
 
-    def make_scores(candidate_seed: int) -> np.ndarray:
+    def make_scores(candidate_seed: int) -> npt.NDArray[Any]:
         return np.random.default_rng(candidate_seed).uniform(0.0, 1.0, len(frame))
 
     def tune() -> tuple[int, float]:

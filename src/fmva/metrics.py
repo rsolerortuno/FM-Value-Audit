@@ -5,14 +5,16 @@ from __future__ import annotations
 from collections.abc import Callable
 
 import numpy as np
+import numpy.typing as npt
+from typing import Any
 from sklearn.metrics import average_precision_score
 
 from fmva.schemas import MetricInterval
 
-MetricFunction = Callable[[np.ndarray, np.ndarray], float]
+MetricFunction = Callable[[npt.NDArray[Any], npt.NDArray[Any]], float]
 
 
-def _validate_binary(y_true: np.ndarray) -> None:
+def _validate_binary(y_true: npt.NDArray[Any]) -> None:
     unique = set(np.unique(y_true).tolist())
     if not unique <= {0, 1}:
         raise ValueError("Labels must be binary")
@@ -20,13 +22,13 @@ def _validate_binary(y_true: np.ndarray) -> None:
         raise ValueError("At least one positive label is required")
 
 
-def _rank_order(scores: np.ndarray) -> np.ndarray:
+def _rank_order(scores: npt.NDArray[Any]) -> npt.NDArray[Any]:
     if not np.isfinite(scores).all():
         raise ValueError("Scores must be finite")
     return np.argsort(-scores, kind="mergesort")
 
 
-def precision_at_k(y_true: np.ndarray, scores: np.ndarray, k: int = 20) -> float:
+def precision_at_k(y_true: npt.NDArray[Any], scores: npt.NDArray[Any], k: int = 20) -> float:
     """Return precision among the top-k ranked genes."""
     _validate_binary(y_true)
     if k <= 0:
@@ -36,7 +38,7 @@ def precision_at_k(y_true: np.ndarray, scores: np.ndarray, k: int = 20) -> float
     return float(y_true[order[:actual_k]].mean())
 
 
-def recall_at_k(y_true: np.ndarray, scores: np.ndarray, k: int = 20) -> float:
+def recall_at_k(y_true: npt.NDArray[Any], scores: npt.NDArray[Any], k: int = 20) -> float:
     """Return recall among the top-k ranked genes."""
     _validate_binary(y_true)
     if k <= 0:
@@ -46,7 +48,7 @@ def recall_at_k(y_true: np.ndarray, scores: np.ndarray, k: int = 20) -> float:
     return float(y_true[order[:actual_k]].sum() / y_true.sum())
 
 
-def reciprocal_rank(y_true: np.ndarray, scores: np.ndarray) -> float:
+def reciprocal_rank(y_true: npt.NDArray[Any], scores: npt.NDArray[Any]) -> float:
     """Return reciprocal rank of the first positive gene."""
     _validate_binary(y_true)
     order = _rank_order(scores)
@@ -55,15 +57,15 @@ def reciprocal_rank(y_true: np.ndarray, scores: np.ndarray) -> float:
     return 1.0 / float(first_positive + 1)
 
 
-def auprc(y_true: np.ndarray, scores: np.ndarray) -> float:
+def auprc(y_true: npt.NDArray[Any], scores: npt.NDArray[Any]) -> float:
     """Return average precision, used as AUPRC."""
     _validate_binary(y_true)
     return float(average_precision_score(y_true, scores))
 
 
 def expected_calibration_error(
-    y_true: np.ndarray,
-    probabilities: np.ndarray,
+    y_true: npt.NDArray[Any],
+    probabilities: npt.NDArray[Any],
     bins: int = 10,
 ) -> float:
     """Compute equal-width expected calibration error."""
@@ -87,7 +89,7 @@ def expected_calibration_error(
     return float(error)
 
 
-def metric_bundle(y_true: np.ndarray, scores: np.ndarray, k: int = 20) -> dict[str, float]:
+def metric_bundle(y_true: npt.NDArray[Any], scores: npt.NDArray[Any], k: int = 20) -> dict[str, float]:
     """Compute all raw ranking metrics."""
     return {
         f"precision_at_{k}": precision_at_k(y_true, scores, k),
@@ -98,8 +100,8 @@ def metric_bundle(y_true: np.ndarray, scores: np.ndarray, k: int = 20) -> dict[s
 
 
 def bootstrap_interval(
-    y_true: np.ndarray,
-    scores: np.ndarray,
+    y_true: npt.NDArray[Any],
+    scores: npt.NDArray[Any],
     metric: MetricFunction,
     replicates: int,
     seed: int,
@@ -128,9 +130,9 @@ def bootstrap_interval(
 
 
 def paired_bootstrap_difference(
-    y_true: np.ndarray,
-    method_scores: np.ndarray,
-    reference_scores: np.ndarray,
+    y_true: npt.NDArray[Any],
+    method_scores: npt.NDArray[Any],
+    reference_scores: npt.NDArray[Any],
     metric: MetricFunction,
     replicates: int,
     seed: int,

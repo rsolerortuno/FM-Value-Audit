@@ -6,6 +6,8 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
+import numpy.typing as npt
+from typing import Any
 import pandas as pd
 
 
@@ -16,7 +18,7 @@ class ExternalNpzAdapter:
     model_id: str
     embedding_path: Path
 
-    def embed(self, frame: pd.DataFrame, feature_columns: list[str]) -> np.ndarray:
+    def embed(self, frame: pd.DataFrame, feature_columns: list[str]) -> npt.NDArray[Any]:
         """Align external embeddings to the input gene order."""
         del feature_columns
         payload = np.load(self.embedding_path, allow_pickle=False)
@@ -46,7 +48,7 @@ class MockFoundationAdapter:
     model_id: str
     reason: str
 
-    def embed(self, frame: pd.DataFrame, feature_columns: list[str]) -> np.ndarray:
+    def embed(self, frame: pd.DataFrame, feature_columns: list[str]) -> npt.NDArray[Any]:
         """Raise an explicit non-computation error."""
         del frame, feature_columns
         raise RuntimeError(f"NOT_COMPUTED: {self.model_id}: {self.reason}")

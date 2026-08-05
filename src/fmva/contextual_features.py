@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+import numpy.typing as npt
 import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
@@ -101,7 +102,7 @@ def default_context_views() -> tuple[ContextView, ...]:
 
 def load_contextual_pair(
     root: Path,
-) -> tuple[pd.DataFrame, np.ndarray, np.ndarray, ContextualArtifactManifest]:
+) -> tuple[pd.DataFrame, npt.NDArray[Any], npt.NDArray[Any], ContextualArtifactManifest]:
     """Load one validated contextual pretrained/random pair from ``root``."""
     manifest_path = root / "CONTEXTUAL_MANIFEST.json"
     if not manifest_path.is_file():
@@ -147,13 +148,13 @@ def load_contextual_pair(
 
 def _aggregate_one_matrix(
     index: pd.DataFrame,
-    matrix: np.ndarray,
+    matrix: npt.NDArray[Any],
     genes: list[str],
     views: tuple[ContextView, ...],
-) -> tuple[np.ndarray, list[str], dict[str, int]]:
+) -> tuple[npt.NDArray[Any], list[str], dict[str, int]]:
     gene_to_position = {gene: position for position, gene in enumerate(genes)}
     width = matrix.shape[1]
-    blocks: list[np.ndarray] = []
+    blocks: list[npt.NDArray[Any]] = []
     columns: list[str] = []
     coverage: dict[str, int] = {}
 
@@ -183,7 +184,7 @@ def build_contextual_gene_views(
     root: Path,
     *,
     views: tuple[ContextView, ...] | None = None,
-) -> tuple[pd.DataFrame, np.ndarray, np.ndarray, dict[str, object]]:
+) -> tuple[pd.DataFrame, npt.NDArray[Any], npt.NDArray[Any], dict[str, object]]:
     """Build fixed pretrained/random gene matrices from one contextual export."""
     index, pretrained, random, manifest = load_contextual_pair(root)
     selected_views = views or default_context_views()
@@ -215,12 +216,12 @@ def build_contextual_gene_views(
 
 def fit_development_contextual_pca(
     gene_frame: pd.DataFrame,
-    matrix: np.ndarray,
+    matrix: npt.NDArray[Any],
     development_genes: set[str],
     *,
     components: int = 32,
     seed: int = 20260804,
-) -> tuple[np.ndarray, dict[str, object]]:
+) -> tuple[npt.NDArray[Any], dict[str, object]]:
     """Fit scale/PCA only on development genes and transform all genes."""
     if matrix.ndim != 2 or len(gene_frame) != matrix.shape[0]:
         raise ValueError("Gene frame and contextual matrix are not aligned")
@@ -259,8 +260,8 @@ def fit_development_contextual_pca(
 def write_contextual_gene_representation(
     output_path: Path,
     gene_frame: pd.DataFrame,
-    pretrained_pca: np.ndarray,
-    random_pca: np.ndarray,
+    pretrained_pca: npt.NDArray[Any],
+    random_pca: npt.NDArray[Any],
     *,
     prefix: str,
     metadata: dict[str, object],

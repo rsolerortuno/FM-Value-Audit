@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+import numpy.typing as npt
 
 
 @dataclass(frozen=True)
@@ -44,7 +45,7 @@ def _peak_rss_mb() -> float:
     return usage / 1024.0
 
 
-def _geometry_correlation(left: np.ndarray, right: np.ndarray) -> float:
+def _geometry_correlation(left: npt.NDArray[Any], right: npt.NDArray[Any]) -> float:
     if len(left) < 3:
         return float("nan")
     left_norm = left / np.maximum(np.linalg.norm(left, axis=1, keepdims=True), 1e-12)
@@ -176,12 +177,12 @@ def _random_like_geneformer(state: dict[str, Any], seed: int) -> dict[str, Any]:
 
 def tokenize_geneformer(
     gene_symbols: list[str],
-    counts: np.ndarray,
+    counts: npt.NDArray[Any],
     symbol_to_ensembl: dict[str, str],
     token_dictionary: dict[str, int],
     gene_medians: dict[str, float],
     maximum_length: int,
-) -> tuple[np.ndarray, np.ndarray, float]:
+) -> tuple[npt.NDArray[Any], npt.NDArray[Any], float]:
     """Apply the V1 rank-value tokenisation to raw counts."""
     mapped: list[tuple[int, int, float]] = []
     for gene_index, symbol in enumerate(gene_symbols):
@@ -214,13 +215,13 @@ def tokenize_geneformer(
 def run_geneformer_subset(
     model_path: Path,
     gene_symbols: list[str],
-    counts: np.ndarray,
+    counts: npt.NDArray[Any],
     symbol_to_ensembl_path: Path,
     token_dictionary_path: Path,
     gene_median_path: Path,
     maximum_length: int,
     seed: int,
-) -> tuple[np.ndarray, np.ndarray, RuntimeResult]:
+) -> tuple[npt.NDArray[Any], npt.NDArray[Any], RuntimeResult]:
     """Execute pretrained and identically shaped random V1 encoders on CPU."""
     torch = _torch()
     from safetensors.torch import load_file
@@ -271,7 +272,7 @@ def run_geneformer_subset(
     return pretrained, random, result
 
 
-def _digitize_deterministic(values: np.ndarray, bins: int) -> np.ndarray:
+def _digitize_deterministic(values: npt.NDArray[Any], bins: int) -> npt.NDArray[Any]:
     output = np.zeros_like(values, dtype=np.float32)
     nonzero = np.flatnonzero(values > 0)
     if len(nonzero) == 0:
@@ -284,11 +285,11 @@ def _digitize_deterministic(values: np.ndarray, bins: int) -> np.ndarray:
 
 def tokenize_scgpt(
     gene_symbols: list[str],
-    counts: np.ndarray,
+    counts: npt.NDArray[Any],
     vocab: dict[str, int],
     maximum_length: int,
     bins: int,
-) -> tuple[np.ndarray, np.ndarray, np.ndarray, float]:
+) -> tuple[npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any], float]:
     """Create deterministic binned sequences with a leading CLS token."""
     mapped = [
         (index, vocab[symbol]) for index, symbol in enumerate(gene_symbols) if symbol in vocab
@@ -413,10 +414,10 @@ def run_scgpt_subset(
     vocab_path: Path,
     args_path: Path,
     gene_symbols: list[str],
-    counts: np.ndarray,
+    counts: npt.NDArray[Any],
     maximum_length: int,
     seed: int,
-) -> tuple[np.ndarray, np.ndarray, RuntimeResult]:
+) -> tuple[npt.NDArray[Any], npt.NDArray[Any], RuntimeResult]:
     """Execute the frozen whole-human encoder and a shape-matched random control."""
     torch = _torch()
     vocab = json.loads(vocab_path.read_text(encoding="utf-8"))
@@ -460,12 +461,12 @@ def run_scgpt_subset(
 
 def tokenize_geneformer_contextual(
     gene_symbols: list[str],
-    counts: np.ndarray,
+    counts: npt.NDArray[Any],
     symbol_to_ensembl: dict[str, str],
     token_dictionary: dict[str, int],
     gene_medians: dict[str, float],
     maximum_length: int,
-) -> tuple[np.ndarray, np.ndarray, np.ndarray, float]:
+) -> tuple[npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any], float]:
     """Tokenise raw counts and retain original gene-column indices per token position."""
     mapped: list[tuple[int, int, float]] = []
     for gene_index, symbol in enumerate(gene_symbols):
@@ -499,11 +500,11 @@ def tokenize_geneformer_contextual(
 
 def tokenize_scgpt_contextual(
     gene_symbols: list[str],
-    counts: np.ndarray,
+    counts: npt.NDArray[Any],
     vocab: dict[str, int],
     maximum_length: int,
     bins: int,
-) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, float]:
+) -> tuple[npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any], float]:
     """Create scGPT input and retain original gene-column indices for non-CLS tokens."""
     mapped = [
         (index, vocab[symbol]) for index, symbol in enumerate(gene_symbols) if symbol in vocab
@@ -573,12 +574,12 @@ def load_scgpt_contextual_states(
 
 
 def encode_geneformer_contextual_batch(
-    tokens: np.ndarray,
-    mask: np.ndarray,
+    tokens: npt.NDArray[Any],
+    mask: npt.NDArray[Any],
     state: dict[str, Any],
     *,
     device: str,
-) -> np.ndarray:
+) -> npt.NDArray[Any]:
     """Return final token hidden states for one Geneformer batch."""
     torch = _torch()
     token_tensor = torch.from_numpy(tokens).to(device)
@@ -589,13 +590,13 @@ def encode_geneformer_contextual_batch(
 
 
 def encode_scgpt_contextual_batch(
-    tokens: np.ndarray,
-    values: np.ndarray,
-    mask: np.ndarray,
+    tokens: npt.NDArray[Any],
+    values: npt.NDArray[Any],
+    mask: npt.NDArray[Any],
     state: dict[str, Any],
     *,
     device: str,
-) -> np.ndarray:
+) -> npt.NDArray[Any]:
     """Return final token hidden states for one scGPT batch."""
     torch = _torch()
     token_tensor = torch.from_numpy(tokens).to(device)

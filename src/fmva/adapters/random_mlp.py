@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
+import numpy.typing as npt
+from typing import Any
 import pandas as pd
 
 
@@ -26,7 +28,7 @@ class RandomMLPAdapter:
             + self.embedding_width
         )
 
-    def _weights(self, input_width: int) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    def _weights(self, input_width: int) -> tuple[npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any]]:
         rng = np.random.default_rng(self.seed)
         first = rng.normal(
             0.0,
@@ -44,9 +46,9 @@ class RandomMLPAdapter:
 
     @staticmethod
     def _normalisation(
-        reference_matrix: np.ndarray,
-        reference_indices: np.ndarray,
-    ) -> tuple[np.ndarray, np.ndarray]:
+        reference_matrix: npt.NDArray[Any],
+        reference_indices: npt.NDArray[Any],
+    ) -> tuple[npt.NDArray[Any], npt.NDArray[Any]]:
         reference = reference_matrix[reference_indices]
         means = reference.mean(axis=0)
         scales = reference.std(axis=0)
@@ -55,10 +57,10 @@ class RandomMLPAdapter:
 
     def embed_arrays(
         self,
-        reference_matrix: np.ndarray,
-        target_matrix: np.ndarray,
-        reference_indices: np.ndarray,
-    ) -> tuple[np.ndarray, np.ndarray]:
+        reference_matrix: npt.NDArray[Any],
+        target_matrix: npt.NDArray[Any],
+        reference_indices: npt.NDArray[Any],
+    ) -> tuple[npt.NDArray[Any], npt.NDArray[Any]]:
         """Embed reference and target arrays using training-only normalisation."""
         if reference_matrix.ndim != 2 or target_matrix.ndim != 2:
             raise ValueError("Input matrices must be two-dimensional")
@@ -81,14 +83,14 @@ class RandomMLPAdapter:
         self,
         frame: pd.DataFrame,
         feature_columns: list[str],
-        reference_indices: np.ndarray,
-    ) -> np.ndarray:
+        reference_indices: npt.NDArray[Any],
+    ) -> npt.NDArray[Any]:
         """Embed a frame using normalisation fitted on supplied indices."""
         matrix = frame.loc[:, feature_columns].to_numpy(dtype=float)
         embeddings, _ = self.embed_arrays(matrix, matrix, reference_indices)
         return embeddings
 
-    def embed(self, frame: pd.DataFrame, feature_columns: list[str]) -> np.ndarray:
+    def embed(self, frame: pd.DataFrame, feature_columns: list[str]) -> npt.NDArray[Any]:
         """Embed all rows, fitting normalisation on all rows for generic adapter use."""
         if not feature_columns:
             raise ValueError("feature_columns cannot be empty")

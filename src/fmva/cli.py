@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Any
 
 import numpy as np
+import numpy.typing as npt
 import pandas as pd
 import typer
 from sklearn.linear_model import LogisticRegression
@@ -164,12 +165,12 @@ def baseline(
 
 
 def _fit_embedding_head(
-    embeddings: np.ndarray,
-    labels: np.ndarray,
-    train_indices: np.ndarray,
-    validation_indices: np.ndarray,
+    embeddings: npt.NDArray[Any],
+    labels: npt.NDArray[Any],
+    train_indices: npt.NDArray[Any],
+    validation_indices: npt.NDArray[Any],
     seed: int,
-) -> tuple[np.ndarray, EffortRecord]:
+) -> tuple[npt.NDArray[Any], EffortRecord]:
     tracker = EffortTracker(
         method="embedding_head",
         seed=seed,
@@ -210,7 +211,7 @@ def _fit_embedding_head(
     selected_c = float(tracker.run_tuning(tune))
     tracker.selected_configuration = f"C={selected_c:g}"
 
-    def final() -> np.ndarray:
+    def final() -> npt.NDArray[Any]:
         model = make_model(selected_c)
         model.fit(embeddings, labels)
         return np.asarray(model.predict_proba(embeddings)[:, 1], dtype=np.float64)

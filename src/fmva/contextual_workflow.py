@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+import numpy.typing as npt
 import pandas as pd
 
 from fmva.contextual import CONTEXT_INDEX_COLUMNS, deterministic_context_sample, sha256_file
@@ -181,10 +182,10 @@ def select_protocol_cells(
 class TokenGeneAccumulator:
     """Accumulate final token hidden states into gene means for one sample-context."""
 
-    pretrained_sum: np.ndarray
-    random_sum: np.ndarray
-    token_count: np.ndarray
-    cell_count: np.ndarray
+    pretrained_sum: npt.NDArray[Any]
+    random_sum: npt.NDArray[Any]
+    token_count: npt.NDArray[Any]
+    cell_count: npt.NDArray[Any]
 
     @classmethod
     def create(cls, n_genes: int, width: int) -> TokenGeneAccumulator:
@@ -197,9 +198,9 @@ class TokenGeneAccumulator:
 
     def update(
         self,
-        gene_indices: np.ndarray,
-        pretrained_hidden: np.ndarray,
-        random_hidden: np.ndarray,
+        gene_indices: npt.NDArray[Any],
+        pretrained_hidden: npt.NDArray[Any],
+        random_hidden: npt.NDArray[Any],
     ) -> None:
         if gene_indices.shape != pretrained_hidden.shape[:2]:
             raise ValueError("gene index and pretrained hidden shapes do not align")
@@ -215,7 +216,7 @@ class TokenGeneAccumulator:
             np.add.at(self.token_count, genes, 1)
             np.add.at(self.cell_count, np.unique(genes), 1)
 
-    def finalise(self) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    def finalise(self) -> tuple[npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any]]:
         genes = np.flatnonzero(self.token_count > 0)
         denominator = self.token_count[genes, None]
         pretrained = (self.pretrained_sum[genes] / denominator).astype(np.float32)
@@ -226,10 +227,10 @@ class TokenGeneAccumulator:
 def write_sample_context_partial(
     path: Path,
     *,
-    gene_indices: np.ndarray,
-    pretrained: np.ndarray,
-    random: np.ndarray,
-    cell_counts: np.ndarray,
+    gene_indices: npt.NDArray[Any],
+    pretrained: npt.NDArray[Any],
+    random: npt.NDArray[Any],
+    cell_counts: npt.NDArray[Any],
     metadata: dict[str, str],
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -245,7 +246,7 @@ def write_sample_context_partial(
 
 def read_sample_context_partial(
     path: Path,
-) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, dict[str, str]]:
+) -> tuple[npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any], npt.NDArray[Any], dict[str, str]]:
     with np.load(path, allow_pickle=False) as payload:
         metadata = json.loads(str(payload["metadata_json"].item()))
         return (
@@ -262,7 +263,7 @@ def reduce_sample_context_partials(
     *,
     gene_symbols: list[str],
     width: int,
-) -> tuple[pd.DataFrame, np.ndarray, np.ndarray]:
+) -> tuple[pd.DataFrame, npt.NDArray[Any], npt.NDArray[Any]]:
     """Average sample-level gene embeddings equally within each biological context."""
     grouped: dict[tuple[str, str, str, str], list[Path]] = {}
     for path in partial_paths:
@@ -276,8 +277,8 @@ def reduce_sample_context_partials(
         grouped.setdefault(key, []).append(path)
 
     index_rows: list[dict[str, Any]] = []
-    pretrained_rows: list[np.ndarray] = []
-    random_rows: list[np.ndarray] = []
+    pretrained_rows: list[npt.NDArray[Any]] = []
+    random_rows: list[npt.NDArray[Any]] = []
     n_genes = len(gene_symbols)
     for context, paths in sorted(grouped.items()):
         pretrained_sum = np.zeros((n_genes, width), dtype=np.float64)

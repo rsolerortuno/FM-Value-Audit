@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
+import numpy.typing as npt
+from typing import Any
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
@@ -13,11 +15,11 @@ from sklearn.model_selection import train_test_split
 class TemporalSplit:
     """Indices and labels for historical tuning and prospective evaluation."""
 
-    historical_train: np.ndarray
-    historical_validation: np.ndarray
-    evaluation: np.ndarray
-    historical_labels: np.ndarray
-    evaluation_labels: np.ndarray
+    historical_train: npt.NDArray[Any]
+    historical_validation: npt.NDArray[Any]
+    evaluation: npt.NDArray[Any]
+    historical_labels: npt.NDArray[Any]
+    evaluation_labels: npt.NDArray[Any]
     cutoff_year: int
     evaluation_end_year: int
 
@@ -26,9 +28,9 @@ class TemporalSplit:
 class RandomSplit:
     """Indices for the intentionally leaky random-split ablation."""
 
-    train: np.ndarray
-    test: np.ndarray
-    labels: np.ndarray
+    train: npt.NDArray[Any]
+    test: npt.NDArray[Any]
+    labels: npt.NDArray[Any]
 
 
 def build_temporal_split(frame: pd.DataFrame, seed: int) -> TemporalSplit:
@@ -96,11 +98,11 @@ def build_random_split(frame: pd.DataFrame, seed: int) -> RandomSplit:
 
 def deterministic_subset(
     frame: pd.DataFrame,
-    indices: np.ndarray,
-    labels: np.ndarray,
+    indices: npt.NDArray[Any],
+    labels: npt.NDArray[Any],
     maximum: int | None,
     seed: int,
-) -> np.ndarray:
+) -> npt.NDArray[Any]:
     """Keep all positives and deterministically sample negatives up to a maximum."""
     if maximum is None or len(indices) <= maximum:
         return indices

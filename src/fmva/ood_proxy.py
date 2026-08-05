@@ -21,6 +21,7 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+import numpy.typing as npt
 import pandas as pd
 from scipy import sparse
 from scipy.stats import rankdata, spearmanr
@@ -55,7 +56,7 @@ class RidgeFit:
     """Fitted deterministic ridge head and its out-of-fold predictions."""
 
     alpha: float
-    oof: np.ndarray
+    oof: npt.NDArray[Any]
     scaler: StandardScaler
     model: Ridge
     oof_spearman: float
@@ -69,7 +70,7 @@ def stable_gene_fold(gene_symbol: str, n_folds: int) -> int:
     return int.from_bytes(digest[:8], "big") % n_folds
 
 
-def safe_spearman(left: np.ndarray, right: np.ndarray) -> float:
+def safe_spearman(left: npt.NDArray[Any], right: npt.NDArray[Any]) -> float:
     """Return Spearman correlation or NaN when it is undefined."""
     left = np.asarray(left, dtype=float)
     right = np.asarray(right, dtype=float)
@@ -194,7 +195,7 @@ def nsclc_post_lesion_matrix(
     gene_order_path: Path,
     sample_metadata_path: Path,
     supplement_path: Path,
-) -> tuple[list[str], np.ndarray, pd.DataFrame, pd.DataFrame]:
+) -> tuple[list[str], npt.NDArray[Any], pd.DataFrame, pd.DataFrame]:
     """Return post-treatment log2-CPM profiles aggregated per target lesion."""
     genes = _load_gene_order(gene_order_path)
     pseudobulk = sparse.load_npz(pseudobulk_path).tocsr()
@@ -217,7 +218,7 @@ def nsclc_post_lesion_matrix(
     log_cpm = np.log2(cpm.toarray() + 1.0)
 
     lesion_rows: list[dict[str, Any]] = []
-    lesion_vectors: list[np.ndarray] = []
+    lesion_vectors: list[npt.NDArray[Any]] = []
     for lesion_id, group in mapping.groupby("lesion_id", sort=True):
         if group["lesion_response"].nunique() != 1 or group["patient"].nunique() != 1:
             raise ValueError(f"Inconsistent lesion mapping for {lesion_id}")
@@ -249,7 +250,7 @@ def nsclc_response_features(
     gene_order_path: Path,
     sample_metadata_path: Path,
     supplement_path: Path,
-) -> tuple[pd.DataFrame, pd.DataFrame, np.ndarray, pd.DataFrame]:
+) -> tuple[pd.DataFrame, pd.DataFrame, npt.NDArray[Any], pd.DataFrame]:
     """Build lesion-level post-treatment NSCLC response features."""
     genes, lesion_matrix, lesion_metadata, mapping = nsclc_post_lesion_matrix(
         pseudobulk_path, gene_order_path, sample_metadata_path, supplement_path
@@ -271,14 +272,14 @@ def nsclc_response_features(
 
 
 def _fit_matched_ridge(
-    features: np.ndarray,
-    labels: np.ndarray,
+    features: npt.NDArray[Any],
+    labels: npt.NDArray[Any],
     genes: list[str],
     alphas: tuple[float, ...],
     n_folds: int,
 ) -> RidgeFit:
     folds = np.asarray([stable_gene_fold(gene, n_folds) for gene in genes], dtype=int)
-    oof_by_alpha: dict[float, np.ndarray] = {}
+    oof_by_alpha: dict[float, npt.NDArray[Any]] = {}
     scores: list[tuple[float, float, float]] = []
     for alpha in alphas:
         oof = np.full(len(labels), np.nan, dtype=float)
@@ -309,10 +310,10 @@ def _fit_matched_ridge(
 
 
 def _reduce_embedding(
-    embedding: np.ndarray,
+    embedding: npt.NDArray[Any],
     components: int,
     seed: int,
-) -> tuple[np.ndarray, float]:
+) -> tuple[npt.NDArray[Any], float]:
     components = min(components, embedding.shape[1], len(embedding) - 1)
     if components < 1:
         raise ValueError("No PCA components available")
@@ -330,7 +331,7 @@ def load_static_checkpoint_embeddings(
     scgpt_model: Path,
     scgpt_vocab: Path,
     seed: int,
-) -> tuple[dict[str, np.ndarray], np.ndarray, dict[str, float]]:
+) -> tuple[dict[str, npt.NDArray[Any]], npt.NDArray[Any], dict[str, float]]:
     """Map gene symbols to checkpoint token embeddings and matched random controls."""
     import torch
     from safetensors.torch import load_file
@@ -380,8 +381,8 @@ def load_static_checkpoint_embeddings(
 
 
 def _signed_top_overlap(
-    prediction: np.ndarray,
-    truth: np.ndarray,
+    prediction: npt.NDArray[Any],
+    truth: npt.NDArray[Any],
     maximum: int = 500,
 ) -> tuple[float, float]:
     k = min(maximum, len(prediction))
@@ -398,7 +399,7 @@ def _bootstrap_fixed_predictions(
     predictions: pd.DataFrame,
     genes: list[str],
     nsclc_genes: list[str],
-    lesion_matrix: np.ndarray,
+    lesion_matrix: npt.NDArray[Any],
     lesion_metadata: pd.DataFrame,
     iterations: int,
     seed: int,
@@ -539,12 +540,12 @@ def run_response_transfer_proxy(
     for name in embeddings:
         embeddings[name] = embeddings[name][common]
 
-    reduced: dict[str, np.ndarray] = {}
+    reduced: dict[str, npt.NDArray[Any]] = {}
     explained: dict[str, float] = {}
     for name, embedding in embeddings.items():
         reduced[name], explained[name] = _reduce_embedding(embedding, pca_components, seed)
 
-    methods: dict[str, np.ndarray] = {
+    methods: dict[str, npt.NDArray[Any]] = {
         "manual_features": manual,
         "geneformer_static_pca32": reduced["geneformer_static"],
         "scgpt_static_pca32": reduced["scgpt_static"],

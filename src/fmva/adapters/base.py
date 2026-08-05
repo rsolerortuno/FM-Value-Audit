@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Protocol
+from typing import Any, Protocol
 
 import numpy as np
+import numpy.typing as npt
 import pandas as pd
 
 
@@ -16,6 +17,6 @@ class RepresentationAdapter(Protocol):
         """Stable adapter identifier."""
         ...
 
-    def embed(self, frame: pd.DataFrame, feature_columns: list[str]) -> np.ndarray:
+    def embed(self, frame: pd.DataFrame, feature_columns: list[str]) -> npt.NDArray[Any]:
         """Return one embedding vector per input gene."""
         ...

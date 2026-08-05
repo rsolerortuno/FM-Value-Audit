@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+import numpy.typing as npt
 import pandas as pd
 from scipy import sparse
 
@@ -220,7 +221,7 @@ def read_gse115978_metadata(path: Path) -> pd.DataFrame:
     return frame
 
 
-def _group_matrix(labels: Sequence[str]) -> tuple[list[str], np.ndarray]:
+def _group_matrix(labels: Sequence[str]) -> tuple[list[str], npt.NDArray[Any]]:
     categories = sorted(set(labels))
     lookup = {value: index for index, value in enumerate(categories)}
     matrix = np.zeros((len(labels), len(categories)), dtype=np.float64)
@@ -228,12 +229,12 @@ def _group_matrix(labels: Sequence[str]) -> tuple[list[str], np.ndarray]:
     return categories, matrix
 
 
-def _safe_log2_ratio(numerator: np.ndarray, denominator: np.ndarray) -> np.ndarray:
+def _safe_log2_ratio(numerator: npt.NDArray[Any], denominator: npt.NDArray[Any]) -> npt.NDArray[Any]:
     result = np.log2(numerator + 1.0) - np.log2(denominator + 1.0)
     return np.asarray(result, dtype=np.float64)
 
 
-def _group_mean_or_nan(matrix: np.ndarray, mask: np.ndarray) -> np.ndarray:
+def _group_mean_or_nan(matrix: npt.NDArray[Any], mask: npt.NDArray[Any]) -> npt.NDArray[Any]:
     if int(mask.sum()) == 0:
         return np.full(matrix.shape[0], np.nan, dtype=np.float64)
     result = matrix[:, mask].mean(axis=1)
@@ -266,10 +267,10 @@ def process_gse115978(
     type_names, type_design = _group_matrix(metadata["cell_type"].astype(str).tolist())
     type_counts = type_design.sum(axis=0)
     gene_names: list[str] = []
-    sample_sums: list[np.ndarray] = []
-    type_sums: list[np.ndarray] = []
-    total_sums: list[np.ndarray] = []
-    positive_counts: list[np.ndarray] = []
+    sample_sums: list[npt.NDArray[Any]] = []
+    type_sums: list[npt.NDArray[Any]] = []
+    total_sums: list[npt.NDArray[Any]] = []
+    positive_counts: list[npt.NDArray[Any]] = []
 
     for chunk in pd.read_csv(counts_path, index_col=0, chunksize=chunk_rows):
         values = chunk.to_numpy(dtype=np.float64, copy=False)
@@ -379,7 +380,7 @@ def process_gse120575(
     nonresponder_mask = state_meta["response"].eq("Non-responder").to_numpy()
 
     gene_names: list[str] = []
-    state_sums: list[np.ndarray] = []
+    state_sums: list[npt.NDArray[Any]] = []
     total_sums: list[float] = []
     positive_counts: list[int] = []
     with gzip.open(tpm_path, "rb") as handle:
@@ -484,7 +485,7 @@ def choose_model_cells(metadata: pd.DataFrame, maximum: int, seed: int) -> pd.Da
 def load_selected_counts(
     counts_path: Path,
     selected_cell_ids: Sequence[str],
-) -> tuple[list[str], np.ndarray]:
+) -> tuple[list[str], npt.NDArray[Any]]:
     """Load only selected cells from a gene-by-cell CSV matrix."""
     selected = set(selected_cell_ids)
     frame = pd.read_csv(

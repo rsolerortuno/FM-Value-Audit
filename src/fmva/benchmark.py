@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+import numpy.typing as npt
 import pandas as pd
 import sklearn
 from sklearn.linear_model import LogisticRegression
@@ -102,7 +103,7 @@ def _run_random_split_ablation(frame: pd.DataFrame, seed: int) -> dict[str, Any]
     selected_c, validation_auprc = tracker.run_tuning(tune)
     tracker.selected_configuration = f"C={selected_c:g}"
 
-    def final() -> np.ndarray:
+    def final() -> npt.NDArray[Any]:
         model = _make_logistic(selected_c, seed)
         model.fit(matrix[split.train], split.labels[split.train])
         return np.asarray(model.predict_proba(matrix[split.test])[:, 1], dtype=np.float64)

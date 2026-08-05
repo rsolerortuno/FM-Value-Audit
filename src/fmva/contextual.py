@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+import numpy.typing as npt
 import pandas as pd
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
@@ -482,8 +483,8 @@ def write_contextual_artifact(
     checkpoint_sha256: str,
     input_hashes: dict[str, str],
     index: pd.DataFrame,
-    pretrained: np.ndarray,
-    random: np.ndarray,
+    pretrained: npt.NDArray[Any],
+    random: npt.NDArray[Any],
     selected_cells: int,
     represented_samples: int,
     sequence_length: int,

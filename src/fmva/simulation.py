@@ -5,6 +5,8 @@ from __future__ import annotations
 import math
 
 import numpy as np
+import numpy.typing as npt
+from typing import Any
 import pandas as pd
 
 REQUIRED_SYNTHETIC_COLUMNS = {
@@ -28,7 +30,7 @@ REQUIRED_SYNTHETIC_COLUMNS = {
 }
 
 
-def _sigmoid(values: np.ndarray) -> np.ndarray:
+def _sigmoid(values: npt.NDArray[Any]) -> npt.NDArray[Any]:
     clipped = np.clip(values, -30.0, 30.0)
     result = 1.0 / (1.0 + np.exp(-clipped))
     return np.asarray(result, dtype=np.float64)
