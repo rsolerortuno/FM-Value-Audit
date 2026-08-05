@@ -5,8 +5,6 @@
 [![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-yellow.svg)](LICENSE)
 
-The project does not use manually authored test or coverage images as evidence. Current engineering status comes from executable GitHub Actions jobs and their uploaded JUnit, coverage, audit and package artifacts.
-
 # FM Value Audit
 
 **Does a single-cell foundation model add enough information to improve a real target-prioritisation decision?**
